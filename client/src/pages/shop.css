@@ -1,0 +1,495 @@
+/* تصميم الشبكة */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 2fr));
+  gap: 14px;
+  position: relative;
+  top: -90px;
+  padding: 5px;
+border: transparent solid;
+  cursor: pointer;
+
+
+}
+
+
+.product-card {
+  position: relative;
+  box-shadow: 0px 0px 10px -9px rgb(75, 74, 74);
+  transition: transform 0.3s ease;
+
+  overflow: hidden;
+}
+
+
+
+/* تصميم الأسعار */
+.product-price {
+  display: flex;
+  flex-direction: column;
+}
+
+.original-price {
+  text-decoration: line-through;
+  color: #999;
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.discounted-price {
+  color: #FF416C;
+  font-weight: 700;
+  font-size: 15px;
+}
+
+
+
+/* تصميم الأيقونة في الزاوية اليمنى */
+.iconcard{
+border:#d6dadf solid ;
+ padding:6px;
+ border-radius:50px;
+  color:black;
+  position: absolute;
+bottom: 60px;
+ 
+  right: 10px;
+}
+
+
+.img-container {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border: transparent solid;
+}
+
+.img_stckres {
+  width: 100%;
+  height: auto;
+  position: relative;
+  
+  transition: transform 0.3s ease;
+  /* لتنعيم التحريك */
+}
+
+.img_stckres:hover {
+  transform: scale(1.3);
+  /* تكبير الصورة بنسبة 10% */
+}
+
+.bloc_stickres_all {
+  position: relative;
+  top: 50px;
+  border: transparent solid;
+  display: flex;
+
+
+
+}
+.truncate {
+  display: block;
+  max-width: 100%; /* الحد الأقصى للعرض */
+  overflow: hidden;
+  text-overflow: ellipsis; /* تحويل النص إلى نقاط */
+  white-space: nowrap; /* منع الانتقال إلى سطر جديد */
+}
+
+
+.stickres_bloc {
+  border: transparent solid;
+  top: 50px;
+  width: 1500px;
+  margin: auto;
+  position: relative;
+  left: -0px;
+}
+
+.button-group {
+  border: transparent solid;
+  position: fixed;
+  min-width: 220px;
+  top: 130px;
+  left: 30px;
+  color: #5c5c5c;
+  max-width: 300px;
+  
+}
+.button_catag {
+  position: relative;
+  color: #0a0a0a;
+  z-index: 700;
+  top: 10px;
+  float: left;
+  left: 20px;
+  display: none;
+  background-color: transparent;
+  border: transparent solid;
+  font-weight: 900;
+  font-size: 17px;
+}
+.button_catag_navbar{
+  position: fixed;
+width: 190px;
+  z-index: 700;
+  top: 20px;
+  float: right;
+  display: block;
+  right: 20px;
+  background-color: transparent;
+  color: #070707;
+  border: transparent solid;
+  border-radius: 50px;
+  font-weight: 900;
+  transition: 0.3s;
+
+  font-size: 25px;
+}
+.bloc_button_catg_navbar {
+  border: transparent solid;
+  position: fixed;
+  top: 10px; /* Maintain the top positioning */
+  height: 0px; /* Keep the height */
+  z-index: 100;
+  top: -1px;
+  width: 1400px; /* Keep the width */
+  background-color: transparent; /* Background color */
+  left: 50%; /* Position left at 50% of the parent */
+  transform: translateX(-50%); /* Shift it back to the left by half its width to center */
+
+}
+
+.button_catag_navbar:hover{
+  border: #d6dadf solid;
+
+}
+.button_catag:hover {
+  color: #FF416C;
+}
+.footer_2{
+  border: rgb(255, 255, 255) solid;
+  position: fixed;
+  /* استخدام position: fixed لتثبيت العنصر */
+  bottom: 0;
+  /* تثبيته عند أسفل الصفحة */
+  width: 1px;
+  left: 5px;
+  display: block;
+  /* يمتد بعرض الصفحة بالكامل */
+  background-color: #ffffff;
+  /* يمكنك إضافة خلفية حسب الحاجة */
+  height: 53px;
+  /* إضافة بعض التباعد الداخلي */
+  text-align: center;
+  /* لمحاذاة المحتوى في المنتصف */
+  z-index:      150;
+  /* للتأكد من ظهور العنصر فوق المحتوى الآخر */
+}
+
+.category-button{
+  display: flex;
+ 
+  border: transparent;
+  margin-top: 17px;
+  position: relative;
+  top: -15px;
+  left: 15px;
+  background-color: transparent;
+}
+.category-button.active{
+  color: #FF416C;
+}
+
+
+.category-button:active{
+  color: #FF416C;
+}
+.category-button:hover{
+ color: #FF416C;
+}
+.bloc_cadre_bloc_catalog{
+  border: transparent solid;
+    position: relative;
+
+   background-color: rgb(255, 255, 255);
+     width: 330px ;
+     box-shadow: 2px 0px 5px -5px rgb(119, 119, 119);
+     top: -80px;
+}
+.catalog{
+  border: rgb(224, 224, 224) solid;
+  padding: 5px;
+  border-radius: 50px;
+  
+}
+.ellipsis {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1; /* عدد الأسطر التي تريد عرضها */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: 1.2em; /* ارتفاع السطر */
+  width: 200px; /* العرض المطلوب */
+}
+
+.titrecategr{
+  font-family: "Playfair Display", serif;
+
+  font-weight: 700;
+  left: 15px;
+  font-size:23px;
+  color: #FF416C;
+  position: fixed;
+  top: 120px;
+
+}
+
+@media (max-width: 1406px) {
+ .titre_button_catalg{
+  display: none;
+
+ }
+ .button_catag_navbar{
+  width: 50px;
+  right: 10px;
+
+  
+}
+.bloc_button_catg_navbar {
+width: 100%;
+right: 10px;
+border: transparent solid;
+}
+
+
+
+
+
+}
+@media (max-width: 1209px) {
+ 
+ 
+  .bloc_button_catg_navbar {
+   width: 100%;
+   border: transparent solid;
+
+    }
+    .button_catag_navbar{
+      float: right;
+    }
+    
+ 
+ 
+ }
+ 
+
+
+
+@media (max-width: 1488px) {
+  .stickres_bloc {
+
+    width: 100%;
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 2fr));
+
+
+
+  }
+  .bloc_cadre_bloc_catalog{
+     position: relative;
+      width: 300px ;
+ }
+}
+
+@media (max-width: 1122px) {
+
+  .product-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 2fr));
+  }
+}
+
+@media (max-width: 550px) {
+  .product-grid {
+    grid-template-columns: repeat(auto-fill, minmax(170px, 2fr));
+
+
+
+  }
+}
+
+@media (max-width: 768px) {
+  .product-grid {
+    grid-template-columns: repeat(auto-fill, minmax(190px, 2fr));
+
+
+
+  }
+
+  .button-group {
+    display: none;
+  }
+  .button_catag {
+  
+    display: block;
+    
+  }
+  .bloc_cadre_bloc_catalog{
+    display: none;
+ }
+
+ .nome_buttonSuivante{
+  display: none;
+ }
+ .nome_buttonPrécédente{
+  display: none; }
+
+
+}
+
+@media (max-width: 432px) {
+  .product-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 2fr));
+
+
+
+  }
+
+
+}
+
+
+@media (max-width: 380px) {
+  .product-grid {
+    grid-template-columns: repeat(auto-fill, minmax(107px, 2fr));
+
+
+
+  }
+}
+@media (max-width: 330px) {
+  .original-price {
+    font-weight: 500;
+    font-size: medium;
+  }
+
+  .discounted-price {
+    font-weight: 500;
+    font-size: medium;
+  }
+
+}
+@media (max-width: 319px) {
+
+  .button_catag_navbar{
+    display: none;
+  }
+
+  
+}
+
+ul {
+  list-style: none;
+  padding-left: 20px;
+  font-size: 15px;
+  
+}
+
+li {
+  margin: 10px 10;
+  
+  
+
+}
+.category-button{
+  position: relative;
+  top: 30px;
+  font-size: 20PX;
+  left: 40px;color: #5c5c5c;
+}
+.nested {
+  display: none;
+}
+
+.nested.active {
+  display: block;
+}
+
+
+.name_categ {
+  font-weight: 500;
+  top: 50px;
+  position: relative;
+  left: 0px;
+  cursor: pointer;
+  transition: 0.1s;
+  font-size: 25px;
+  width: 170px;
+  border-radius: 50px;
+  border: rgb(236, 236, 236) solid 0px;
+  display: inline-block;
+}
+
+.name_categ::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px; /* سمك الخط */
+  background-color: #FF416C; /* لون الخط */
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+
+
+
+.name_categ:hover::after {
+  transform: scaleX(1);
+}
+
+.button_pagination{
+  position: relative;
+  margin: auto;
+  border: #5c5c5c;
+  font-size: large;
+  font-weight: 700;
+  color: #444444;
+  background-color: #f2f2f6;
+  border-radius: 50px;
+  height: 40px;
+  top: 25px;
+  transition: 0.3s;
+}
+.button_pagination:hover{
+  background-color: #FF416C;
+  color: #f1f1f1;
+
+  }
+.bloc_pagination{
+  border: transparent solid;
+  
+  height: 150px;
+}
+
+.nome_buttonSuivante{
+ margin-left: 15px;
+}
+.nome_buttonPrécédente{
+  margin-right: 15px;
+}
+.button_up {
+  z-index: 900;
+  position: fixed;
+  bottom: 150px; /* يحدد المسافة من الأسفل */
+  right: 20px; /* يحدد المسافة من الجانب الأيمن */
+  border-radius: 50px;
+  width: 50px;
+  height: 50px;
+  border: transparent;
+  background-color: #FF416C;
+  box-shadow: 0px 0px 5px 0.5px rgb(75, 74, 74);
+}

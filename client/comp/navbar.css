@@ -1,0 +1,543 @@
+.logi_img {
+  width: 3em;
+  position: relative;
+  top: 18px;
+  cursor: pointer;
+}
+
+
+.one{
+  color: #FF416C;
+}
+
+.search-container {
+  display: flex;
+  width: 100%;
+
+  border: 3px solid transparent;
+  border-radius: 50px;
+  padding: 5px;
+  background-color: #f3f3f6;
+  background-clip: padding-box;
+  /* لمنع تأثير التدرج على الخلفية */
+  position: relative;
+  top: 1px;
+  animation: border-animation 3s linear infinite;
+}
+
+.search-container::before {
+  content: "";
+  z-index: 51;
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  border-radius: 50px;
+  background: linear-gradient(
+    90deg,
+    #ff0000, /* Red */
+    #ff7f00, /* Orange */
+    #ffff00, /* Yellow */
+    #7fff00, /* Light Green */
+    #00ff00, /* Green */
+    #00ff7f, /* Spring Green */
+    #00ffff, /* Cyan */
+    #007fff, /* Sky Blue */
+    #0000ff, /* Blue */
+    #7f00ff, /* Violet */
+    #ff00ff, /* Magenta */
+    #ff007f, /* Rose */
+    #ff0000, /* Red */
+    #ff1a00,
+    #ff3300,
+    #ff4d00,
+    #ff6600,
+    #ff8000,
+    #ff9900,
+    #ffb300,
+    #ffcc00,
+    #ffe600,
+    #e6ff00,
+    #ccff00,
+    #99ff00,
+    #66ff00,
+    #33ff00,
+    #00ff00,
+    #00ff33,
+    #00ff66,
+    #00ff99,
+    #00ffcc,
+    #00ffff,
+    #00ccff,
+    #0099ff,
+    #007fff,
+    #0055ff,
+    #0033ff,
+    #001aff,
+    #0000ff,
+    #1a00ff,
+    #3300ff,
+    #4d00ff,
+    #6600ff,
+    #8000ff,
+    #9900ff,
+    #b300ff,
+    #cc00ff,
+    #e600ff,
+    #ff00e6,
+    #ff00cc,
+    #ff00b3,
+    #ff0099,
+    #ff007f,
+    #ff0066,
+    #ff0055,
+    #ff0044,
+    #ff0033,
+    #ff0022,
+    #ff0011
+  );
+    z-index: -1;
+  background-size: 400%;
+  animation: gradientAnimation 5s linear infinite;
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.search-input {
+  flex-grow: 1;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  padding: 6px;
+  font-size: 1rem;
+}
+
+.search-button {
+  background-color: transparent;
+  border: none;
+  width: 30px;
+  float: right;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.bloc_navbar_tlf_serche {
+  border: transparent solid 1px;
+  height: 65px;
+  width: 102%;
+  display: none;
+  background-color: #ffffff;
+  z-index: 60;
+  box-shadow: 0px 10px 7px -12px rgb(75, 74, 74);
+  /* الظل فقط من الأسفل */
+  position: absolute;
+  left: -8px;
+  top: 65px;
+}
+
+.bloc_navbar {
+  border: transparent solid;
+  width: 1400px;
+  /* العرض الأصلي للبار */
+  margin: auto;
+  height: 60px;
+}
+
+.titre {
+  font-size: 38px;
+  font-weight: 700;
+  margin-left: 55px;
+  position: relative;
+  top: -28px;
+
+    font-family: "Bebas Neue", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+  
+  
+ color: rgb(4, 1, 39);
+  transition: 0.3s;  
+  cursor: pointer;
+}
+
+.bloc_complait_nav {
+  border: transparent solid;
+  background-color: #f2f2f6;
+  position: fixed;
+  z-index: 55;
+  width: 100%;
+  height: 95px;
+  background-color: white;
+
+  box-shadow: 0px 0px 5px -5px rgb(75, 74, 74);
+}
+
+
+
+.bloc_sersh {
+  border: transparent solid;
+  width: 700px;
+  margin-left: 310px;
+  /* عرض المستطيل الأحمر */
+  height: 50px;
+  z-index: 500;
+  position: relative;
+  top: calc(-100px + 20px); 
+}
+.bloc_sersh_visible{
+  border: transparent solid;
+  width: 780px;
+  margin-left: 265px;
+  /* عرض المستطيل الأحمر */
+  height: 50px;
+  z-index: 500;
+  position: relative;
+  top: calc(-85px + 21px);
+ 
+}
+.bloc_button_card{
+  border: transparent solid;
+  position: fixed;
+  top: 10px; /* Maintain the top positioning */
+  height: 0px; /* Keep the height */
+  z-index: 100;
+  top: -1px;
+  width: 1400px; /* Keep the width */
+  background-color: transparent; /* Background color */
+  left: 50%; /* Position left at 50% of the parent */
+  transform: translateX(-50%); /* Shift it back to the left by half its width to center */
+
+}
+.shopicon_navbar {
+  position: relative;
+  /* تأكد من أن القيم هي خصائص CSS صحيحة */
+  font-size: 2rem;
+  /* استخدم "-" بدلًا من " " للفصل بين الكلمات */
+  color: #FF416C;
+  /* إزالة علامات الاقتباس حول القيم */
+  font-weight: 1000;
+  top: 25px;
+  display: block;
+  /* استخدام "-" للفصل بين الكلمات */
+  text-decoration: none;
+  z-index: 100;
+  /* استخدام "-" للفصل بين الكلمات */
+  float: right;
+  /* تأكد من كتابة القيمة بشكل صحيح */
+  right: 250px;
+  /* استخدام "-" للفصل بين الكلمات */
+  transition: 0.2s;
+  cursor: pointer;
+}
+.shopicon_footer2{
+  float: right;
+  right: 20px;
+  position: relative;
+  top: 12px;
+
+  z-index: 100;
+}
+.bloc_footer2{
+  border:transparent solid 1px;
+  position: fixed;
+  /* استخدام position: fixed لتثبيت العنصر */
+  bottom: 0;
+  /* تثبيته عند أسفل الصفحة */
+  width: 100%;
+  height: 45px;
+  display: none;
+z-index: 100;
+  /* يمتد بعرض الصفحة بالكامل */
+  background-color: transparent;
+  /* يمكنك إضافة خلفية حسب الحاجة */
+  /* إضافة بعض التباعد الداخلي */
+  /* لمحاذاة المحتوى في المنتصف */
+  /* للتأكد من ظهور العنصر فوق المحتوى الآخر */
+
+}
+/* إخفاء شريط التمرير الأفقي للصفحة */
+
+
+@media (max-width: 1200px) {
+  .bloc-button {
+    overflow-x: auto; /* إظهار شريط التمرير الأفقي */
+    overflow-y: hidden; /* منع التمرير العمودي */
+  }
+}
+
+
+@media (max-width: 1406px){
+
+.bloc_button_card{
+  width: 100%;
+}
+.shopicon_navbar {
+  right: 100px;
+}
+
+}
+@media (max-width: 1230px){
+
+
+  .shopicon_navbar {
+    right: 90px;
+  }
+  
+  }
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+.shopicon_navbar:hover {
+  color: rgb(0, 0, 0);
+}
+
+
+.footer {
+  border:transparent solid 500px;
+  position: fixed;
+  /* استخدام position: fixed لتثبيت العنصر */
+  bottom: 0;
+  /* تثبيته عند أسفل الصفحة */
+  width: 100%;
+  display: none;
+  /* يمتد بعرض الصفحة بالكامل */
+  background-color: #ffffff;
+  /* يمكنك إضافة خلفية حسب الحاجة */
+  /* إضافة بعض التباعد الداخلي */
+  text-align: center;
+ padding: 10px;
+  /* لمحاذاة المحتوى في المنتصف */
+  z-index: 100;
+  /* للتأكد من ظهور العنصر فوق المحتوى الآخر */
+}
+
+.icon_serche {
+  position: relative;
+  /* تأكد من أن القيم هي خصائص CSS صحيحة */
+  font-size:17px;
+  /* استخدم "-" بدلًا من " " للفصل بين الكلمات */
+  color: #000000;
+  /* إزالة علامات الاقتباس حول القيم */
+  display: block;
+  /* استخدام "-" للفصل بين الكلمات */
+ top: 1px;
+
+  z-index: 100;
+  /* استخدام "-" للفصل بين الكلمات */
+  text-align: center;
+  left: 15px;
+  /* تأكد من كتابة القيمة بشكل صحيح */
+  /* استخدام "-" للفصل بين الكلمات */
+  transition: 0.2s;
+}
+.pi-home{
+  position: relative;
+  /* تأكد من أن القيم هي خصائص CSS صحيحة */
+  font-size:17px;
+  /* استخدم "-" بدلًا من " " للفصل بين الكلمات */
+  color: #000000;
+  /* إزالة علامات الاقتباس حول القيم */
+  display: block;
+  /* استخدام "-" للفصل بين الكلمات */
+ top: 1px;
+
+  z-index: 100;
+  /* استخدام "-" للفصل بين الكلمات */
+  left: 0px;
+  /* تأكد من كتابة القيمة بشكل صحيح */
+  /* استخدام "-" للفصل بين الكلمات */
+  transition: 0.2s;
+  margin-left: 29%;
+  text-decoration: none;
+  
+}
+.pi-home:hover,
+.shopicon_footer:hover,
+.icon_serche:hover{
+  color: #FF416C;
+}
+
+
+.logo {
+  border: transparent solid;
+  width: 245px;
+  position: relative;
+  top: -7px;
+  left: -10px;
+  height: 72px;
+}
+
+
+@media (max-width: 1209px) {
+  .bloc_sersh_visible {
+    width: calc(100% - 450px);
+    /* عرض المستطيل مع مساحة */
+  }
+
+  .bloc_navbar {
+    width: 100%;
+    /* عرض شريط التنقل */
+  }
+  .shopicon_navbar{
+    right: 70px;
+    z-index: 800;
+  }
+  .shopicon_navbar {
+   
+    position: relative;
+    
+  }
+
+}
+
+
+@media (max-width: 768px) {
+  .blocremiz{
+    position: relative;
+    top: 50px;
+    }
+  .footer {
+    border: transparent solid 1px;
+
+    box-shadow: 0px 0px 10px -5px rgb(75, 74, 74);
+
+   
+    display: block;
+    /* يمتد بعرض الصفحة بالكامل */
+    background-color: #ffffff;
+    /* يمكنك إضافة خلفية حسب الحاجة */
+  }
+
+  .bloc_sersh {
+    width: calc(100% - 60px);
+    /* عرض المستطيل مع مساحة */
+    margin-left: 30px;
+
+    border: transparent solid;
+    z-index: 400;
+    /* عرض المستطيل الأحمر */
+    top: calc(-90px + 100px);
+    /* ضبط المسافة لتكون ثابتة */
+  }
+
+
+  .titre {
+    position: relative;
+    left: 20%;
+    transform: translate(-30%, 0%);
+    /* لتحريكها لتكون في المنتصف تمامًا */
+
+  }
+
+
+
+
+  .button_over_categori {
+
+    display: block;
+
+  }
+  .shopicon_navbar{
+   display: none;position: relative;top: -500px;
+  
+  }
+  
+
+  .logo {
+    margin: auto;
+    border: transparent solid;
+    top: -5px;
+
+  }
+  .search-input {
+   
+    width: 100%;
+   
+  }
+  .bloc_navbar_tlf_serche {
+   display: block;
+  }
+  .bloc_sersh_visible{
+  display: none;
+   
+  }
+  .bloc_footer2{
+
+    display: block;
+  
+  
+  }
+
+}
+
+.underline {
+  width: 100%;
+   position: absolute;
+   top: 60px;
+   left: 0px;
+  
+  height: 0.5px; /* ارتفاع الخط */
+  background-color: rgb(117, 117, 117); /* لون الخط */
+  margin-top: 5px; /* مسافة بين العنوان والخط */
+}
+.underline_button{
+  width: 100%;
+   position: absolute;
+   top: 820px;
+   left: 0px;
+  
+  height: 0.5px; /* ارتفاع الخط */
+  background-color: rgb(117, 117, 117); /* لون الخط */
+  margin-top: 5px; /* مسافة بين العنوان والخط */
+}
+.blocremiz{
+text-align: center;
+position: relative;
+z-index: 0;
+
+top:95px;
+background-color: #e3f8e9;
+
+border:  transparent solid;
+}
+.pargremiz{
+border: transparent solid 1px;
+position: relative;
+color: #eb053b;
+font-weight: 500;
+left: 0px;
+top: 5px;
+display: flex;
+ justify-content: center; 
+ align-items: center;
+  
+}
+@media (max-width: 384px) {
+  .pargremiz{
+height: 50px;
+  }
+}

@@ -1,0 +1,221 @@
+.carousel_home{
+    width:95%;
+    position: relative;
+    top: -120px;
+    border-radius: 20px;
+    margin: auto;
+    
+    border:  rgb(255, 255, 255) solid 3px;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  background-color: rgb(255, 255, 255);
+  opacity: 1;
+  border-radius: 50%; /* شكل دائري للأزرار */
+  width: 40px;
+  height: 40px;
+  top: 50%; /* لضبطها في المنتصف عمودياً */
+  transform: translateY(-50%); /* لضبطها في المنتصف بشكل صحيح */
+  border: #FF416C solid 1px;
+}
+
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  width: 18px;
+  
+}
+
+
+.carousel-control-prev{
+    margin-left: 20px;
+    transition: 0.1s;
+    
+}
+.carousel-control-prev:hover{
+    background-color: #FF416C;
+    box-shadow: 0px 0px 5px 0.3px rgb(32, 32, 32);
+
+
+}
+.carousel-control-next{
+    margin-right: 20px;
+    transition: 0.1s;
+    
+
+}
+.carousel-control-next:hover{
+    background-color: #FF416C;
+    box-shadow: 0px 0px 5px 0.3px rgb(32, 32, 32);
+
+}
+.button_carousel{
+    
+    background-color:#FF416C;
+    padding: 10px;
+color: rgb(236, 236, 236);
+width: 220px;
+font-size: large;
+font-weight: 500;
+    border: transparent solid;
+    border-radius: 50px;
+    position: relative;
+    top: -20px;
+    
+    float: left;
+    text-decoration: none;
+    border:transparent solid 3px;
+transition: 0.3s;
+    
+}
+.button_carousel:hover{
+    transform: scale(1.1);
+background-color: #d30f3d;
+}
+
+.d-block{
+
+        width: 100%;
+      border-radius: 10px;
+        height: 650px;
+}
+@media (max-width: 1170px) {
+    .d-block{
+
+       
+        height: 530px;
+}
+.button_carousel{
+  
+width: 200px;
+padding: 6px;
+
+    
+}
+.name_button{
+    font-size: 15px;
+    position: relative;
+    top: -2px;
+ }
+ }
+ @media (max-width: 1000px) {
+    .d-block{
+
+       
+        height: 450px;
+}
+.button_carousel{
+  
+    width: 200px;
+    padding: 6px;
+    
+        
+    }
+    .button_carousel{
+  
+        width: 150px;
+        padding: 3px;
+        
+            
+        }
+        .name_button{
+            font-size: 12px;
+            position: relative;
+            top: -2px;
+         }
+    
+ }
+
+ @media (max-width: 850px) {
+    .d-block{
+
+       
+        height: 400px;
+}
+ .carousel-control-prev-icon,
+.carousel-control-next-icon {
+  width: 15px;
+}
+.carousel-control-next,.carousel-control-prev{
+    width: 30px;
+    height: 30px;   
+}
+.button_carousel{
+  
+    width: 130px;
+    padding: 3px;
+    
+        
+    }
+    .name_button{
+        font-size: 11px;
+        position: relative;
+        top: -3px;
+     }
+
+}
+
+ 
+ @media (max-width: 650px) {
+    .d-block{
+
+       
+        height: 300px;
+}
+.button_carousel{
+  
+ top: 10px;
+        
+    }
+ }
+ @media (max-width: 550px) {
+    .d-block{
+
+       
+        height: 250px;
+}
+ 
+.button_carousel{
+  
+    width: 120px;
+    padding: 0px;
+    
+        
+    }
+    .name_button{
+        font-size: 10px;
+      
+     }
+
+
+ }
+ @media (max-width: 450px) {
+    .d-block{
+
+       
+        height: 200px;
+}
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  width: 10px;
+}
+.carousel-control-next,.carousel-control-prev{
+    width: 20px;
+    height: 20px;   
+}
+.button_carousel{
+  
+    width: 100px;
+    height: 25px;
+    
+        
+    }
+    .name_button{
+        font-size: 8px;
+        top: -8px;
+      
+     }
+ 
+ }
+ 

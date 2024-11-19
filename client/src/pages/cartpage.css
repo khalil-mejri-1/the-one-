@@ -1,0 +1,296 @@
+/* Basic reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+  }
+  
+  .cart-container_panier {
+    width: 100%;
+    max-width: 1300px;
+    margin: auto;
+    padding: 20px;
+  }
+  
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .cart-discount_panier {
+    background-color: #e5f7df;
+    color: #388e3c;
+    padding: 10px;
+    text-align: center;
+    margin-bottom: 20px;
+    border-radius: 5px;
+  }
+  
+
+
+  .cart-item-image {
+    width: 150px;
+    height: auto;
+    border-radius: 8px;
+  }
+  
+  .cart-item-details {
+    flex-grow: 1;
+    margin-left: 30px;
+  }
+  
+  .cart-item-details h3 {
+    margin-top: 10px;
+    font-size: 18px;
+    font-weight: 500;
+    color: rgb(48, 48, 48);
+    margin-bottom: 5px;
+  }
+  
+  .cart-item-details p {
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+  
+  .original-price_panier {
+    text-decoration: line-through;
+    color: #888;
+    position: relative;
+    top: 50px;
+    margin-right: 10px;
+    font-size: 17px;
+    float: right;
+  }
+  
+  .discounted-price_panier {
+    color: #f7184c;
+    font-weight: bold;
+    font-size: 17px;
+    position: relative;
+    top: 30px;
+    position: relative;
+    right: 10px;
+    float: right;
+  }
+ /* Quantity control container */
+.quantity-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  /* Quantity buttons (- and +) */
+  .quantity-control button {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%; /* Circular buttons */
+    border: 1px solid #d3d3d3; /* Light border */
+    background-color: #f7f7f7; /* Light grey background */
+    color: #202074; /* Dark blue color for icons */
+    font-size: 18px; /* Larger font size */
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease; /* Smooth transitions */
+  }
+  
+  /* Hover effect on buttons */
+  .quantity-control button:hover {
+    background-color: #e0e0e0; /* Darker grey on hover */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Light shadow on hover */
+  }
+  
+  /* Quantity display (number in the middle) */
+  .quantity-control span {
+    display: inline-block;
+    width: 50px;
+    height: 36px;
+    border: 1px solid #d3d3d3; /* Light border for quantity box */
+    text-align: center;
+    line-height: 36px; /* Vertically center the number */
+    font-size: 18px;
+    color: #2c2c6c; /* Dark blue color for number */
+    border-radius: 8px; /* Slight rounding of the quantity box */
+    background-color: white; /* White background for quantity */
+  }
+  
+  /* Disabled button style */
+  .quantity-control button:disabled {
+    background-color: #f0f0f0; /* Lighter grey for disabled buttons */
+    color: #a9a9a9; /* Grey color for disabled icons */
+    cursor: not-allowed; /* Show disabled cursor */
+    box-shadow: none; /* Remove shadow for disabled buttons */
+  }
+  
+
+
+  @media (max-width: 490px) {
+    .cart-item_panier {
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    .cart-item-image {
+      margin: auto;
+    }
+  
+    .cart-item-details {
+      margin-left: 0;
+    }
+    .original-price_panier {
+      
+        top: 40px;
+       
+      }
+      
+      .discounted-price_panier {
+      
+        top: 20px;
+       
+      }
+
+  }
+  @media (max-width: 290px) {
+  
+    .cart-item_panier {
+       
+        height: 350px;
+      }
+      
+  
+    .original-price_panier {
+     
+        top: 90px;
+      
+      }
+      
+      .discounted-price_panier {
+       
+        top: 70px;
+      
+      }
+      .quantity-control {
+       position: relative;
+       top: -20px;
+       left: 15%;
+      }
+ 
+      
+ 
+  }
+  
+  .submit, .annuler{
+    border: rgb(214, 212, 212) solid 2px;
+    width: 150px;
+    font-family: sans-serif;
+    height: 45px;
+    border-radius: 50px;
+    font-size: 20px;
+    background-color:transparent;
+    color: #f7184c;
+    font-weight: 700;
+    margin-top: 40px;
+    transition: 0.1s;
+
+  }
+    
+  .submit:hover, .annuler:hover{
+    background-color: #d40334;
+    box-shadow: 0px 0px 1px 0.1px rgb(77, 77, 77);
+    color: #ffffff;
+
+  }
+  
+
+  .annuler{
+   float: right;
+  }
+  .remove-button{
+    float: right;
+    border: #cacaca solid 1px;
+    position: relative;
+    top: -80px;
+    right: -50px;
+    width: 36px;
+    border-radius: 50px;
+  height: 36px;
+  }
+  .pi-times{
+color: #f7184c;
+position: relative;
+top: 1px;
+  }
+  .paragraphe_cart{
+    max-width: 500px;
+    border: transparent solid;
+  }
+  @media (max-width: 490px) {
+  
+    .remove-button{
+      top: -240px;
+    }
+  }
+
+
+  @media (max-width: 350px) {
+  
+    .submit, .annuler{
+      width: 100%;
+      
+  
+    }
+    .annuler{
+      position: relative;
+      top: -25px;
+    }
+  }
+
+
+.bloc_kemel{
+  border:  transparent solid;
+  display: flex;
+}
+.bloc_input{
+  border: transparent;
+  float: right;
+  position: relative;
+  padding: 10px;
+  width:50%;
+  right: 10px;
+}
+.cart-item_panier {
+  display: flex;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  width:100%;
+  margin-right: 20px;
+  background-color: #fff;
+}
+.cart-items_panier{
+  border: transparent solid;
+  width: 100%;
+  margin-right: 30px;
+}
+
+@media (max-width: 732px) {
+  .bloc_kemel{
+    display: block;
+
+  }
+  .bloc_input{
+    position: relative;
+    margin-top: 30px;
+    padding: 10px;
+    width:100%;
+    left: 0px;
+  }
+}
+.red-border {
+  border: 1px solid red !important;
+}
