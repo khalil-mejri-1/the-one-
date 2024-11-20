@@ -28,6 +28,11 @@ const connectDB = async () => {
 
 connectDB();
 
+
+app.get('/', (req, res) => {
+    res.send('Hello World!')
+  })
+  
 // نقطة النهاية لإضافة عنصر جديد إلى مجموعة naruto
 app.post('/api/:category', async (req, res) => {
     const { category } = req.params;
