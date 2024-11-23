@@ -30,11 +30,55 @@ connectDB();
 
 
 app.get('/', (req, res) => {
-    res.send('Hello World!')
+    res.send('Heleeeeeelo World!')
   })
   
+
+// نقطة نهاية لجلب منتج معين حسب المعرف
+app.get(`/product/:category`, async (req, res) => {
+    try {
+      const { category } = req.params; // استخراج الفئة من الرابط
+      let Model; // تعريف المتغير Model
+  
+      // تحديد النموذج بناءً على الفئة
+      switch (category) {
+        case "naruto":
+          Model = Naruto;
+          break;
+        case "onepiece":
+          Model = Onepiece;
+          break;
+        case "hxh":
+          Model = Hxh;
+          break;
+        case "bleach":
+          Model = Bleach; // تأكد من أن لديك نموذج Bleach أيضًا
+          break;
+        case "kimetsu":
+          Model = kimetsu;
+          break;
+        default:
+          return res.status(400).send("فئة غير صالحة");
+      }
+  
+      // البحث عن جميع المنتجات في الفئة المحددة
+      const products = await Model.find();
+  
+      if (products.length === 0) {
+        return res.status(404).json({ message: 'لا توجد منتجات في هذه الفئة' });
+      }
+  
+      // إرسال بيانات المنتجات كرد
+      res.json(products);
+    } catch (error) {
+      console.error('Error fetching products:', error);
+      res.status(500).json({ message: 'خطأ في الخادم' });
+    }
+  });
+  
+  
 // نقطة النهاية لإضافة عنصر جديد إلى مجموعة naruto
-app.post('/api/:category', async (req, res) => {
+app.post('/product/:category', async (req, res) => {
     const { category } = req.params;
   
     let Model;
@@ -75,7 +119,7 @@ app.post('/api/:category', async (req, res) => {
 app.get("/api/:category", async (req, res) => {
     const { category } = req.params;
     const page = parseInt(req.query.page) || 1; // الصفحة الحالية، افتراضيًا 1
-    const limit = parseInt(req.query.limit) || 40; // عدد العناصر في كل صفحة، افتراضيًا 40
+    const limit = parseInt(req.query.limit) || 0; // عدد العناصر في كل صفحة، افتراضيًا 40
     const skip = (page - 1) * limit; // عدد العناصر التي يجب تجاوزها لبدء الصفحة المطلوبة
   
     let Model;
