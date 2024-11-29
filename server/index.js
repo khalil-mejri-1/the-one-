@@ -32,44 +32,48 @@ app.get('/', (req, res) => {
     res.send('aaaaaHello World!');
 });
 
-// Get products by category
+// نقطة نهاية لجلب منتج معين حسب المعرف
 app.get(`/product/:category`, async (req, res) => {
     try {
-        const { category } = req.params; // Extract category from URL parameter
-        let Model; // Declare variable for model
-
-        // Determine the model based on category
-        switch (category) {
-            case "naruto":
-                Model = Naruto;
-                break;
-            case "onepiece":
-                Model = Onepiece;
-                break;
-            case "hxh":
-                Model = Hxh;
-                break;
-            case "kimetsu":
-                Model = kimetsu;
-                break;
-            default:
-                return res.status(400).send("Invalid category");
-        }
-
-        // Fetch all products from the selected category
-        const products = await Model.find();
-
-        if (products.length === 0) {
-            return res.status(404).json({ message: 'No products found in this category' });
-        }
-
-        // Send the products as a response
-        res.json(products);
+      const { category } = req.params; // استخراج الفئة من الرابط
+      let Model; // تعريف المتغير Model
+  
+      // تحديد النموذج بناءً على الفئة
+      switch (category) {
+        case "naruto":
+          Model = Naruto;
+          break;
+        case "onepiece":
+          Model = Onepiece;
+          break;
+        case "hxh":
+          Model = Hxh;
+          break;
+        case "bleach":
+          Model = Bleach; // تأكد من أن لديك نموذج Bleach أيضًا
+          break;
+        case "kimetsu":
+          Model = kimetsu;
+          break;
+        default:
+          return res.status(400).send("فئة غير صالحة");
+      }
+  
+      // البحث عن جميع المنتجات في الفئة المحددة
+      const products = await Model.find();
+  
+      if (products.length === 0) {
+        return res.status(404).json({ message: 'لا توجد منتssssجات في هذه الفئة' });
+      }
+  
+      // إرسال بيانات المنتجات كرد
+      res.json(products);
     } catch (error) {
-        console.error('Error fetching products:', error);
-        res.status(500).json({ message: 'Server error' });
+      console.error('Error fetching products:', error);
+      res.status(500).json({ message: 'خطأ في الخادم' });
     }
-});
+  });
+  
 
 // Add a new product to a category
 app.post('/product/:category', async (req, res) => {
@@ -104,6 +108,8 @@ app.post('/product/:category', async (req, res) => {
         res.status(500).json({ message: 'Error adding product' });
     }
 });
+
+
 
 app.post('/commands', async (req, res) => {
     const { nom, tlf, nb, ids } = req.body;
