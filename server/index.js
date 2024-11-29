@@ -29,7 +29,7 @@ connectDB();
 
 // Home route
 app.get('/', (req, res) => {
-    res.send('aaaaaHello World!');
+    res.send('Hello 7World!');
 });
 
 // نقطة نهاية لجلب منتج معين حسب المعرف
