@@ -110,7 +110,6 @@ app.post('/product/:category', async (req, res) => {
 });
 
 
-
 app.post('/commands', async (req, res) => {
     const { nom, tlf, nb, ids } = req.body;
 
@@ -121,8 +120,8 @@ app.post('/commands', async (req, res) => {
 
     // التحقق من صحة العناصر في مصفوفة الـ ids
     for (const item of ids) {
-        if (!item.id || typeof item.quantity !== 'number') {
-            return res.status(400).json({ message: 'Each item must have an id and quantity' });
+        if (!item.id || typeof item.quantity !== 'number' || !item.size) {
+            return res.status(400).json({ message: 'Each item must have an id, quantity, and size' });
         }
     }
 
@@ -166,7 +165,6 @@ app.post('/commands', async (req, res) => {
         res.status(500).json({ message: `Server error: ${error.message}` });
     }
 });
-
 
 
 // Get all commands (users)

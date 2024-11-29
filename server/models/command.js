@@ -9,6 +9,7 @@ const commandSchema = new mongoose.Schema({
       id: { type: String, required: true },       // معرف المنتج
       quantity: { type: Number, required: true },
       category: { type: String, required: true },
+      size: { type: String, required: true },      // إضافة حقل الحجم
     },
   ],
   randomNumber: { type: Number, required: true }, // إضافة حقل الرقم العشوائي
