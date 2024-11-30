@@ -8,10 +8,115 @@
   body {
     font-family: Arial, sans-serif;
   }
+  .alertpanier{
+
+    position: fixed;
+    top: 100px;
+     right:15px;
+    padding-bottom: 25px;
+     min-height: 60px;
+     border: transparent solid;
+     border-left:#1ea97c solid 10px ;
+     border-top: none;
+     border-bottom: none;
+      transform: translateX(-0%);
+      z-index: 100;
+      background-color: #f0fcf4;
+
+      box-shadow: 0px 0px 5px 0.5px rgb(128, 128, 128);
+
+border-radius: 5px;
+
+
+  }
+  .bloc_all_cart{
+    border: transparent solid;
+    max-width:1150px;
+  }
+  .souel{
+    font-size: 25px;
+    margin-left: 20px;
+    margin-right: 20px;
+
+  }
+
+  .bloc_buttonconferm{
+    display: flex;
+    margin-top: 20px;
+    gap: 20px;
+    border: transparent solid;
+
+  }
+  .button_conf{
+    border: black solid;
+    background-color: #12835f;
+  }
   
+  .button_ajout_pack{
+    border: #d40334 solid 2px;
+
+    float: right;
+    top: -76px;
+    background-color: transparent;
+margin-bottom: -60px;
+    position: relative;
+    color: #d40334;
+    font-weight: 700;
+    padding: 14px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border-radius: 5px;
+    transition: 0.2s;
+  }
+  .button_ajout_pack:hover{
+    background-color:#d40334  ;
+    
+    color: rgb(240, 240, 240);
+  }
+  
+  
+  .titresuccses{
+    position: relative;
+
+   margin-left: 20px;
+   margin-right: 10px;
+   color:#1ea97c;
+   font-weight: 900;
+   font-size: 20px;
+top: 10px;   
+
+
+  }
+
+.outlined-basic{
+position: absolute;
+z-index: 500;
+  }
+
+.pi-check{
+  font-size: 20px;
+  font-weight: 700;
+  margin-right: 10px;
+   margin-left: 10px;
+  position: relative;
+  top: 2px;
+}
+.buttonclase{
+  border: #12835f solid;
+  padding: 5px;
+  position: relative;
+;
+  border-radius: 5px;
+  transition: 0.1s;
+}
+.buttonclase:hover{
+  border: #070707 solid;
+ 
+}
   .cart-container_panier {
-    width: 100%;
-    max-width: 1300px;
+    border: transparent solid;
+    max-width: 1700px;
+
     margin: auto;
     padding: 20px;
   }
@@ -25,6 +130,7 @@
     background-color: #e5f7df;
     color: #388e3c;
     padding: 10px;
+    width: 100%;
     text-align: center;
     margin-bottom: 20px;
     border-radius: 5px;
@@ -33,7 +139,7 @@
 
 
   .cart-item-image {
-    width: 150px;
+    width: 180px;
     height: auto;
     border-radius: 8px;
   }
@@ -126,8 +232,9 @@
     cursor: not-allowed; /* Show disabled cursor */
     box-shadow: none; /* Remove shadow for disabled buttons */
   }
-  
-
+  .spin_page_cart{
+  font-size: 50px;
+}
 
   @media (max-width: 490px) {
     .cart-item_panier {
@@ -205,7 +312,11 @@
     color: #ffffff;
 
   }
+  .bloc_pack_stick{
+    border: transparent solid;
+    position: relative;
   
+  }
 
   .annuler{
    float: right;
@@ -213,9 +324,20 @@
   .remove-button{
     float: right;
     border: #cacaca solid 1px;
+    position: absolute;
+right: 10px;
+
+    width: 36px;
+    border-radius: 50px;
+  height: 36px;
+  }
+  .addpanier-button{
+    float: right;
+    border: #cacaca solid 3px;
     position: relative;
-    top: -80px;
-    right: -50px;
+    top: -50px;
+    right: -10px;
+    background-color: transparent ;
     width: 36px;
     border-radius: 50px;
   height: 36px;
@@ -229,31 +351,74 @@ top: 1px;
     max-width: 500px;
     border: transparent solid;
   }
-  @media (max-width: 490px) {
-  
-    .remove-button{
-      top: -240px;
-    }
+  .button_remove-all{
+    border: rgb(214, 212, 212) solid 2px;
+
+    font-family: sans-serif;
+   padding: 10px;
+   padding-left: 20px;
+   padding-right: 20px;
+    border-radius: 5px;
+    font-size: 20px;
+    background-color:transparent;
+    color: #f7184c;
+    position: relative;
+    top: -8px;
+    float: right;
+    font-weight: 700;
+    margin-bottom: 10px;
+
+    transition: 0.3s;
   }
-
-
-  @media (max-width: 350px) {
-  
-    .submit, .annuler{
-      width: 100%;
-      
-  
-    }
-    .annuler{
-      position: relative;
-      top: -25px;
-    }
+  .button_remove-all:hover{
+    background-color: #f7184c;
+    color: #ffffff;
+    border: #f7184c solid 2px;
   }
+  .pi-plus-circle{
+    margin-left: 10px;
+    position: relative;
+    top: 3px;
+    color: #d40334;
+    right: 0px;
+    font-size: 25px;
+    transition: 0.2s;
+  }
+  .pi-plus-circle:hover{
+    color: white;
+  }
+  .pi-times-circle{
+    margin-left: 10px;
+    position: relative;
+    top: 3px;
+    right: 0px;
+    font-size: 20px;
+  }
+  .spin_card{
+    margin-left: 10px;
+    position: relative;
+    top: 3px;
+    right: 0px;
+    font-size: 20px;
+  }
+  .votrestickers{
+    font-size: 25px;
+    position: relative;
+    border: #FF416C solid;
+    width: 200px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    height: 50px;
+    top: 60px;
+    font-weight: 600;
 
-
+  }
+  
 .bloc_kemel{
   border:  transparent solid;
   display: flex;
+  width: 100%;
 }
 .bloc_input{
   border: transparent;
@@ -275,8 +440,100 @@ top: 1px;
 .cart-items_panier{
   border: transparent solid;
   width: 100%;
+  position: relative;
+  top: -60px;
   margin-right: 30px;
 }
+ 
+.infoclient{
+  font-size:25px;
+  font-weight:700;
+   border:#FF416C solid; 
+   border-top:none;
+    border-left:none;
+     border-right:none;
+     height:50px;
+}
+.Supprimertout{
+  font-size: 18px;
+  position: relative;
+  
+}
+.button_size{
+  border: rgb(192, 192, 192) solid 3px; 
+  padding: 5px;
+  background-color: transparent;
+  border-radius: 10px;
+  margin-top: 5px;
+  margin-right: 5px;
+  color: #444444;
+  font-weight: 700;
+  transition: 0.3s;
+}
+.button_size:hover{
+  background-color: #FF416C;
+  border-color:#FF416C;
+}
+.total_price{
+  font-size: 20px;
+  font-weight: 700;
+}
+.pricedt{
+  border: transparent solid;
+  background-color: #ffffff;
+  box-shadow: 0px 0px 5px 0.1px rgb(150, 150, 150);
+  padding: 5px;
+  border-radius: 5px;
+}
+  @media (max-width: 490px) {
+  
+    .remove-button{
+      top: -240px;
+    }
+    .votrestickers{
+      font-size: 18px;
+      width: 150px;
+      height:35px;
+   
+     }
+     .Supprimertout{
+      font-size: 15px;
+      top: -2px;
+      position: relative;
+    }
+  }
+
+  @media (max-width: 413px) {
+ 
+    .votrestickers{
+      font-size: 18px;
+      width: 150px;
+      position: relative;
+      top: -13px;
+      height:35px;
+   
+     }
+    .button_remove-all{
+      width: 100%;
+    }
+  }
+
+
+
+  @media (max-width: 350px) {
+  
+    .submit, .annuler{
+      width: 100%;
+      
+  
+    }
+    .annuler{
+      position: relative;
+      top: -25px;
+    }
+  }
+
+
 
 @media (max-width: 732px) {
   .bloc_kemel{
@@ -290,6 +547,14 @@ top: 1px;
     width:100%;
     left: 0px;
   }
+}
+@media (max-width: 930px) {
+  .infoclient ,.votrestickers{
+   font-size: 18px;
+   height:35px;
+
+  }
+
 }
 .red-border {
   border: 1px solid red !important;

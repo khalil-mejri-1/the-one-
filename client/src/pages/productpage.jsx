@@ -3,59 +3,190 @@ import { useLocation, useNavigate } from "react-router-dom";
 import "./productpage.css";
 import Navbar from "../../comp/nav_bar.jsx";
 import Offcanva from '../../comp/Offcanva.jsx';
+import Card from "react-bootstrap/Card";
+import Carousel from "react-bootstrap/Carousel";
+import Skeleton from '@mui/material/Skeleton';  // If you are using Material UI
 
 const ProductPage = () => {
   const location = useLocation();
   const { image, title, price, originalPrice } = location.state || {};
-  
-  const [cartItems, setCartItems] = useState([]);
-  const [isAdding, setIsAdding] = useState(false);  // حالة لعرض الأيقونة الانتظار
-  const [messageContent, setMessageContent] = useState("");  // رسالة النجاح أو الخطأ
-  const [showMessage, setShowMessage] = useState(false);  // حالة لعرض أو إخفاء الرسالة
+  const [isAddingToCartId, setIsAddingToCartId] = useState(null);
+
+  const [cartItems, setCartItems] = useState(() => JSON.parse(localStorage.getItem("cartItems")) || []);
+  const [isAdding, setIsAdding] = useState(false);
+  const [messageContent, setMessageContent] = useState("");
+  const [showMessage, setShowMessage] = useState(false);
+  const [products, setProducts] = useState([]);
+  const [loadingStickerId, setLoadingStickerId] = useState(null);
+  const [itemsPerPage, setItemsPerPage] = useState(5); // Default to 5 items per page
+  const [shuffledStickers, setShuffledStickers] = useState([]);
+  const [currentPage, setCurrentPage] = useState(() => {
+    const savedPage = sessionStorage.getItem("currentPage");
+    return savedPage ? Number(savedPage) : 0;
+  });
+  const [selectedCategory, setSelectedCategory] = useState("");
+
 
   const navigate = useNavigate();
-
-  // تحميل السلة من localStorage عند التحميل
+  const category = location.pathname.split("/")[2];
+ 
   useEffect(() => {
-    const savedCartItems = localStorage.getItem('cartItems');
-    if (savedCartItems) {
-      setCartItems(JSON.parse(savedCartItems));
+    if (category) {
+      setSelectedCategory(category); // تعيين الفئة المستخرجة من الرابط
     }
+  }, [category]);
+
+  useEffect(() => {
+    if (category) {
+      fetch(`https://the-one-opal.vercel.app/product/${category}`)
+        .then(response => response.json())
+        .then(data => {
+          setProducts(data);
+          setLoading(false); // Set loading to false after data is fetched
+        })
+        .catch(error => {
+          console.error("Error fetching products:", error);
+          setLoading(false); // Also set loading to false in case of an error
+        });
+    }
+  }, [category]);
+  
+  // Shuffle the stickers to display them randomly
+  useEffect(() => {
+    if (products.length) {
+      const shuffled = [...products].sort(() => Math.random() - 0.5);
+      setShuffledStickers(shuffled);
+    }
+  }, [products]);
+
+  useEffect(() => {
+    const updateItemsPerPage = () => {
+      const screenWidth = window.innerWidth;
+      if (screenWidth <= 600) {
+        setItemsPerPage(4);
+      } else if (screenWidth <= 900) {
+        setItemsPerPage(6 );
+      } else if (screenWidth <= 1308) {
+        setItemsPerPage(12);
+      } else {
+        setItemsPerPage(14);
+      }
+    };
+
+    updateItemsPerPage();
+    window.addEventListener("resize", updateItemsPerPage);
+
+    return () => {
+      window.removeEventListener("resize", updateItemsPerPage);
+    };
   }, []);
 
-  const addToCart = (sticker) => {
-    // التحقق من أن المنتج غير موجود بالفعل في السلة
-    const isAlreadyInCart = cartItems.some(item => item.title === sticker.title);
-    
-    if (isAlreadyInCart) {
-      setMessageContent("Le sticker est déjà dans le panier.");
-      setShowMessage(true);
-      setTimeout(() => setShowMessage(false), 2000);  // إخفاء الرسالة بعد 3 ثواني
-      return;
+  const [selectedSize, setSelectedSize] = useState("6 cm"); // الحالة لحجم المنتج المختار
+
+const handleSizeSelect = (size) => {
+  setSelectedSize(size); // تحديث الحالة محلياً
+  localStorage.setItem("selectedSize", size); // تخزين الحجم في Local Storage
+};
+
+
+  useEffect(() => {
+    const storedCartItems = localStorage.getItem("cartItems");
+    if (storedCartItems) {
+      setCartItems(JSON.parse(storedCartItems));
     }
+  }, []);
+  
 
-    // تغيير حالة الأيقونة إلى الانتظار أثناء إضافة المنتج
-    setIsAdding(true);
+const addToCart = (sticker) => {
+  setLoadingStickerId(sticker._id); // حدد العنصر الجاري إضافته
+  
+  // التحقق إذا كان العنصر موجودًا بالفعل في السلة
+  const isAlreadyInCart = cartItems.some((item) => item._id === sticker._id);
+  
+  if (isAlreadyInCart) {
+    setMessageContent("Le sticker est déjà dans le panier."); // عرض رسالة
+    setShowMessage(true);
 
-    // محاكاة تأخير لمدة ثانية قبل إضافة المنتج للسلة
     setTimeout(() => {
-      const updatedCart = [...cartItems, sticker];
-      setCartItems(updatedCart);
-      localStorage.setItem('cartItems', JSON.stringify(updatedCart));  // حفظ السلة في localStorage
-      setIsAdding(false);
-      setMessageContent("Le sticker a été ajouté au panier.");
-      setShowMessage(true);
-      setTimeout(() => setShowMessage(false), 3000);  // إخفاء الرسالة بعد 3 ثواني
-    }, 1000);  // تأخير قدره 1 ثانية لمحاكاة الإضافة
+      setShowMessage(false);
+      setMessageContent("");
+      setLoadingStickerId(null);
+    }, 900);
+
+    return;
+  }
+  
+  // إنشاء نسخة محدثة للمنتج مع الحجم المختار
+  const updatedSticker = {
+    ...sticker,
+    category: selectedCategory,
+    size: selectedSize || "6 cm", // استخدام الحجم المختار أو القيمة الافتراضية
+    quantity: 1,
   };
 
+  // تحديث السلة
+  const updatedCart = [...cartItems, updatedSticker];
+  setCartItems(updatedCart);
+  
+  // تخزين السلة في Local Storage
+  localStorage.setItem("cartItems", JSON.stringify(updatedCart));
+  
+  setMessageContent("Le sticker a été ajouté au panier.");
+  setShowMessage(true);
+
+  setTimeout(() => {
+    setShowMessage(false);
+    setMessageContent("");
+    setLoadingStickerId(null);
+  }, 900);
+};
+
+  
+  
+  
+  
   const openCartPage = () => {
     navigate('/cart', { state: { cartItems } });
   };
 
+  const openProductPage = (sticker) => {
+    navigate(`/product/${selectedCategory}/${sticker._id}`, { state: { ...sticker } });
+    setSelectedSize("6 cm"); // تحديث الحالة محلياً
+
+    window.scrollTo(0,0)
+  };
+
+  // Function to chunk the stickers into pages
+  const chunk = (array, size) => {
+    return array.reduce((acc, _, index) => {
+      if (index % size === 0) acc.push(array.slice(index, index + size));
+      return acc;
+    }, []);
+  };
+  const [loading, setLoading] = useState(true);
+
+  const groupedStickers = chunk(shuffledStickers, itemsPerPage);
+ 
+
+  if (loading) {
+    return (
+      <div> 
+        
+        
+         </div>
+    );
+  }
+
+  
+  const handleCategoryChange = (category) => {
+    sessionStorage.setItem("selectedCategory", category);  // Save selected category to sessionStorage
+    setCurrentPage(0); // Reset page to 0 when changing category
+  };
+
+
+  
   return (
     <>
-      {/* رسالة النجاح */}
       {showMessage && (
         <div className="alert alert-success">
           <span className="titre_succses">{messageContent}</span>
@@ -63,7 +194,7 @@ const ProductPage = () => {
         </div>
       )}
 
-      {/* أيقونة السلة في الشريط العلوي */}
+      {/* Cart icon in the top navbar */}
       <div className="bloc_button_card">
         <div className="pi pi-shop shopicon_navbar" onClick={openCartPage}>
           {cartItems.length > 0 && (
@@ -74,9 +205,9 @@ const ProductPage = () => {
         </div>
       </div>
 
-      {/* أيقونة السلة في الشريط السفلي */}
+      {/* Cart icon in the footer */}
       <div className="bloc_footer2">
-        <div className="pi pi-shop shopicon_footer2" onClick={openCartPage}>
+      <div className="pi pi-shop shopicon_footer2" onClick={openCartPage}>
           {cartItems.length > 0 && (
             <span className="cart-count" style={{
               fontSize: "10px",
@@ -97,38 +228,180 @@ const ProductPage = () => {
       </div>
 
       <Navbar />
-      <Offcanva />
+      <Offcanva setSelectedCategory={handleCategoryChange} />
 
       <div className="product-page">
-        <div className='bloc_img_product'>
-          <div className="product-image-container">
-            <img src={image} alt={title} className="product-image" />
-          </div>
-        </div>
-        <div className="product-details">
-          <h1>{title}</h1>
-          <p className="price">{price} DT</p>
-          <p className="discount-price">{originalPrice} DT</p>
-          <button className="add-to-cart" onClick={() => addToCart({ image, title, price, originalPrice })}>
-            {isAdding ? <i className="pi pi-spin pi-spinner"></i> : "Add to Cart"}
+  <div className="bloc_img_product">
+    <div className="product-image-container">
+      <img src={image} alt={title} className="product-image" />
+    </div>
+  </div>
+  <div className="product-details">
+  <h1>{title}</h1>
+  <p className="price">{price} DT</p>
+  <p className="discount-price">{originalPrice} DT</p>
+  <div className='bloc_size'> 
+          <p style={{fontSize:"15px", fontWeight:"700"}}>Size :</p>
+          <button 
+            className='button_size' 
+            onClick={() => handleSizeSelect("6 cm")} 
+            style={{ backgroundColor: selectedSize === "6 cm" ? "#ccc" : "" }}
+          >
+            6 cm
           </button>
-          <div className="product-characteristics">
-            <h2>Caractéristiques du produit</h2>
-            <div className="rating">
-              ★★★★★ <span>4.66 (1828 avis)</span>
-            </div>
-            <ul>
-              <li>Décorez et personnalisez des ordinateurs portables, des bouteilles d'eau et plus encore</li>
-              <li>Sticker en vinyle demi-découpé (kiss-cut), facile à décoller.</li>
-              <li>Ultra résistant, y compris à l'eau.</li>
-              <li>Une bordure blanche de 3,2 mm entoure chaque design.</li>
-              <li>Fini mat.</li>
-              <li>Notez que si vous commandez plusieurs stickers, ils seront imprimés par deux sur une même planche pour limiter le gaspillage.</li>
-              <li>Comme chaque article est fabriqué spécialement pour vous par votre fournisseur tiers local, il peut y avoir de légères différences dans le produit reçu.</li>
-            </ul>
-          </div>
-        </div>
+          <button 
+            className='button_size' 
+            onClick={() => handleSizeSelect("8 cm")} 
+            style={{ backgroundColor: selectedSize === "8 cm" ? "#ccc" : "" }}
+          >
+            8 cm
+          </button>
+          <button 
+            className='button_size' 
+            onClick={() => handleSizeSelect("10 cm")} 
+            style={{ backgroundColor: selectedSize === "10 cm" ? "#ccc" : "" }}
+          >
+            10 cm
+          </button>
+          <button 
+            className='button_size' 
+            onClick={() => handleSizeSelect("12 cm")} 
+            style={{ backgroundColor: selectedSize === "12 cm" ? "#ccc" : "" }}
+          >
+            12 cm
+          </button>
+        </div><br />
+  <button
+    className="add-to-cart"
+    onClick={() => addToCart({ 
+      _id: title,  // استخدم معرّف فريد بناءً على العنوان أو _id الخاص بالمنتج إذا كان لديك
+      image, 
+      title, 
+      selectedSize,
+      price, 
+      originalPrice,
+    })}
+    disabled={isAdding}
+  >
+    {cartItems.some((item) => item._id === title) ? (  // تحقق إذا كان المنتج في السلة
+      <>
+          <span>Le sticker a été ajouté au panier</span>  {/* النص عند إضافة المنتج */}
+
+        <i className="pi pi-check-circle" style={{ color: "", marginLeft:"10px"}}></i> {/* أيقونة check-circle */}
+      </>
+    ) : isAdding ? (
+      <i className="pi pi-spin pi-spinner"></i>  // أيقونة الانتظار أثناء إضافة المنتج
+    ) : (
+      
+
+      <span> Ajouter au panier <i className="pi pi-shopping-cart" style={{ color: "", marginLeft:"10px"}}></i> </span> 
+   
+    )}
+  </button>
+
+  <div className="product-characteristics">
+    <h2>Caractéristiques du produit</h2>
+    <div className="rating">
+      ★★★★★ <span>4.66 (1828 avis)</span>
+    </div>
+    <ul>
+      <li>Décorez et personnalisez des ordinateurs portables, des bouteilles d'eau et plus encore</li>
+      <li>Sticker en vinyle demi-découpé (kiss-cut), facile à décoller.</li>
+      <li>Ultra résistant, y compris à l'eau.</li>
+      <li>Une bordure blanche de 3,2 mm entoure chaque design.</li>
+      <li>Fini mat.</li>
+      <li>Notez que si vous commandez plusieurs stickers, ils seront imprimés par deux sur une même planche pour limiter le gaspillage.</li>
+      <li>Comme chaque article est fabriqué spécialement pour vous par votre fournisseur tiers local, il peut y avoir de légères différences dans le produit reçu.</li>
+    </ul>
+  </div>
+</div>
+
+
+
+</div>
+
+
+      {/* Displaying products in carousel */}
+      <br /> <br /> <br /> <br /> <br />
+      <h3 className="titrebeststick" style={{marginLeft:"30px"}}>Stickers similaires
+      </h3>
+      <br /> 
+      <div className="bloc_carosel_product">
+        <Carousel data-bs-theme="dark" interval={null}>
+          {groupedStickers.map((products, groupIndex) => (
+            <Carousel.Item key={groupIndex}>
+              <div className="blocbeststick">
+                <div className="stickres_bloc_page_home">
+                  <div className="product-grid_page_home">
+                    {products.map((sticker) => (
+                      <div
+                        key={sticker._id}
+                        className="product-card_pagehome"
+                        onClick={() => openProductPage(sticker)}
+                      >
+                        <Card className="product-card">
+                          <div className="img-container">
+                            <Card.Img className="img_stckres" src={sticker.image} />
+                          </div>
+                          <Card.Body>
+                            <p className="truncat">{sticker.title}</p>
+                            <br />
+                            <br />
+                            <Card.Text className="product-price">
+                              <span className="original-price">
+                                {sticker.originalPrice} DT
+                              </span>
+                              <span className="discounted-price">
+                                {sticker.price} DT
+                              </span>
+                              <button
+    style={{
+      backgroundColor: isAddingToCartId === sticker._id ? "gray" : "red", // لون رمادي عند تعطيله
+      border: "black",
+      position: "relative",
+      top: "50px",
+      color: isAddingToCartId === sticker._id ? "white" : "red", // تغيير لون النص عند التعطيل
+      cursor: isAddingToCartId === sticker._id ? "not-allowed" : "pointer", // مؤشر مختلف عند تعطيله
+    }}
+    onClick={(e) => {
+      e.stopPropagation();
+      setIsAddingToCartId(sticker._id); // تعيين الحالة للعنصر الذي تم النقر عليه
+      setTimeout(() => {
+        setIsAddingToCartId(null); // إعادة الحالة بعد ثانية واحدة
+        addToCart(sticker); // إضافة العنصر إلى السلة بعد ثانية
+      }, 400); // بعد 1 ثانية
+    }}
+    disabled={isAddingToCartId === sticker._id} // تعطيل الزر إذا كان العنصر قيد التحميل
+  >
+    {cartItems.some((item) => item._id === sticker._id) ? (
+      <i className="pi pi-check-circle iconcard" style={{ color: "#f7184c" }}></i> // أيقونة check-circle إذا كان العنصر في السلة
+    ) : isAddingToCartId === sticker._id ? (
+      <i className="pi pi-spin pi-spinner iconcard"></i> // أيقونة الانتظار أثناء النقر
+    ) : (
+      <i
+        className="pi pi-shopping-cart iconcard"
+        style={{
+          color: "black", // اللون الافتراضي لأيقونة السلة
+          cursor: "pointer",
+        }}
+      ></i> // أيقونة السلة إذا لم يتم النقر عليها
+    )}
+  </button>
+
+
+                            </Card.Text>
+                          </Card.Body>
+                        </Card>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </Carousel.Item>
+          ))}
+        </Carousel>
       </div>
+      <br /> <br /> <br />   <br /> <br /> <br />
     </>
   );
 };

@@ -1,57 +1,102 @@
 .blocbeststick{
     border: transparent solid;
-    position: relative;
-    left: 0px;
-    top: -40px;
+
+
+
 
 
 }
 .titrebeststick {
-     position: absolute;
-    left: 50px;
-  z-index: 1;
+     position: relative;
+top: 20px;
+  z-index: 0;
     font-weight: 700;
     font-size: x-large;
     width: 330px;
     border-bottom: 3px solid #FF416C; /* يمكنك تعديل السمك واللون كما تريد */
-    padding-bottom:15px; /* لتوفير مسافة بين النص والخط */
-}
-.bloc_5at {
-    border-bottom: 3px solid rgb(201, 201, 201); /* يمكنك تعديل السمك واللون كما تريد */
-    position: absolute;
-    z-index: 0;
-    width:100%; /* استخدم max-width بدلاً من width */
-    top: 44px;
-    left: 50%; /* تغيير هذا لإعادة تحديد المركز */
-    transform: translateX(-50%); /* لتحريك العنصر إلى اليسار بمقدار نصف عرضه */
+    left: -2px;
+    padding-bottom:10px; /* لتوفير مسافة بين النص والخط */
 }
 
+
 .product-grid_page_home{
-    display: grid;
     position: relative;
-    top: 0px;
-    width: 1400px;
-    margin: auto;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 2fr));
-    gap: 14px;
-    padding: 5px;
+   
+
+
+
+   display: flex;
+    gap: 10px;
   border: transparent solid;
     cursor: pointer;
+    display: grid;
+
+    grid-template-columns: repeat(auto-fill, minmax(200px, 2fr));
+    gap: 10px; /* المسافة بين العناصر */
+   
+        margin: auto;
+      
   
 }
 
 .product-card_pagehome{
     position: relative;
     border: transparent solid;
-    top: 90px;
+    
+    
+
+
     transition: transform 0.3s ease;
     overflow: hidden;
 }
-@media (max-width: 1404px) {
+.product-card{
+    background-color: rgb(255, 255, 255) ;
+    border: rgb(173, 173, 173) solid 1px;
+   
+}
+.carousel-indicators{
+    position: relative;
+    top: 00px;
+    display: none;
+}
+.buttonNextpagehome,.buttonPrevious_pagehome{
+    position: relative;
+    top: 0px;
+}
+
+
+.alert-success{
+    position: fixed;
+     top: 100px;
+      right:15px;
+      height: 60px;
+      border: transparent solid;
+       transform: translateX(-0%);
+       z-index: 100;
+       background-color: #FF416C;
+       width:350px ;
+       box-shadow: 0px 0px 5px 0.5px rgb(128, 128, 128);
+   
+   } 
+   .titre_succses{
+   position: relative;
+   top: -10px;
+   color: aliceblue;
+   }
+   .pi-cart-arrow-down{
+       font-size: 30px;
+       margin-left: 20px;
+       color: aliceblue;
+   }
+   
+@media (max-width: 1600px) {
     .product-grid_page_home{
-       width: 100%;
-      
-    }
+        width: 100%;
+       
+     }
+} 
+@media (max-width: 1404px) {
+
     .blocbeststick{
         border: transparent solid;
         position: relative;
@@ -60,74 +105,45 @@
     
     }
 }  
-.buttonNextpagehome,.buttonPrevious_pagehome{
-    position: relative;
-    top: 130px;
-}
+
 
 @media (max-width: 610px) {
-.titrebeststick {
+.titrebeststick { 
    width: 330px;
-   left: 0px;
     border-bottom: 3px solid #FF416C; /* يمكنك تعديل السمك واللون كما تريد */
 }
-@media (max-width: 478px) {
-    .product-grid_page_home{
-       
-        grid-template-columns: repeat(auto-fill, minmax(145px, 2fr));
-      
-      
-    }
-    
-
-
-}  
-@media (max-width: 330px) {
-    .product-grid_page_home{
-       
-        grid-template-columns: repeat(auto-fill, minmax(105px, 2fr));
-      
-      
-    }
-    
-
-
-}  
-@media (max-width: 363px) {
-    .titrebeststick {
-       width: 100%;
-    }
-    .bloc_5at {
-display: none;    }
-      
-    }
- 
 } 
-.alert-success{
- position: fixed;
-  top: 100px;
-   right:15px;
-   height: 60px;
-   border: transparent solid;
-    transform: translateX(-0%);
-    z-index: 100;
-    background-color: #FF416C;
-    width:350px ;
-    box-shadow: 0px 0px 5px 0.5px rgb(128, 128, 128);
 
-} 
-.titre_succses{
-position: relative;
-top: -10px;
-color: aliceblue;
-}
-.pi-cart-arrow-down{
-    font-size: 30px;
-    margin-left: 20px;
-    color: aliceblue;
+
+@media (max-width: 365px) {
+
+        .titrebeststick {
+            width: 90%;
+            
+            font-size: 10px;
+           }
+
+          .product-card_pagehome{
+   
+        
+            border: transparent solid;
+            
+            width: 100%;
+
+        
+          
+      
+    }
+    .product-grid_page_home{
+        grid-template-columns: repeat(auto-fill, minmax(20px, 2fr));
+gap: 0px;
+    }
+
 }
 
- @media (max-width: 428px) {
+
+
+ @media (max-width: 425px) {
     .alert-success{
         width: 300px;
     }
@@ -151,8 +167,28 @@ color: aliceblue;
             top: -5px;
             color: aliceblue;
         }
- 
+        .titrebeststick {
+            width: 90%;
+            left: -15px;
+            font-size: 18px;
+         }
+        
 }  
+@media (max-width: 486px) {
+    .product-grid_page_home{
+   
+        grid-template-columns: repeat(auto-fill, minmax(150px, 2fr));
+        
+          
+      
+    }
+
+        
+}  
+
+
+
+
 @media (max-width: 280px) {
     .alert-success{
            

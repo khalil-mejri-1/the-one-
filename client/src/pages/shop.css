@@ -2,7 +2,7 @@
 .product-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(230px, 2fr));
-  gap: 14px;
+  gap: 10px;
   position: relative;
   top: -90px;
   padding: 5px;
@@ -12,6 +12,15 @@ border: transparent solid;
 
 }
 
+.bloc_stickres_all {
+  overflow-x: hidden;  /* Hide horizontal scroll */
+  overflow-y: hidden;    /* Allow vertical scroll only if needed */
+}
+
+
+html {
+  overflow: auto; /* Disable scroll on the whole page */
+}
 
 .product-card {
   position: relative;
@@ -80,7 +89,9 @@ bottom: 60px;
 
 .bloc_stickres_all {
   position: relative;
-  top: 50px;
+  top: -120px;
+  height: 100%;
+  padding-bottom:70px ;
   border: transparent solid;
   display: flex;
 
@@ -91,6 +102,7 @@ bottom: 60px;
   display: block;
   max-width: 100%; /* الحد الأقصى للعرض */
   overflow: hidden;
+  color: #070707;
   text-overflow: ellipsis; /* تحويل النص إلى نقاط */
   white-space: nowrap; /* منع الانتقال إلى سطر جديد */
 }
@@ -98,11 +110,23 @@ bottom: 60px;
 
 .stickres_bloc {
   border: transparent solid;
-  top: 50px;
+  top: 150px;
   width: 1500px;
   margin: auto;
   position: relative;
   left: -0px;
+}
+.titrcat{
+  position: relative;
+  top: -90px;
+    z-index: 0;
+    display: flex;
+      font-weight: 700;
+      font-size: x-large;
+      width: 330px;
+      border-bottom: 3px solid #FF416C; /* يمكنك تعديل السمك واللون كما تريد */
+      padding-bottom:15px; /* لتوفير مسافة بين النص والخط */
+    
 }
 
 .button-group {
@@ -119,14 +143,13 @@ bottom: 60px;
   position: relative;
   color: #0a0a0a;
   z-index: 700;
-  top: 10px;
+  top: 12px;
   float: left;
   left: 20px;
   display: none;
   background-color: transparent;
   border: transparent solid;
-  font-weight: 900;
-  font-size: 17px;
+ 
 }
 .button_catag_navbar{
   position: fixed;
@@ -138,7 +161,7 @@ width: 190px;
   right: 20px;
   background-color: transparent;
   color: #070707;
-  border: transparent solid;
+  border: black solid;
   border-radius: 50px;
   font-weight: 900;
   transition: 0.3s;
@@ -167,7 +190,7 @@ width: 190px;
   color: #FF416C;
 }
 .footer_2{
-  border: rgb(255, 255, 255) solid;
+  border: transparent solid;
   position: fixed;
   /* استخدام position: fixed لتثبيت العنصر */
   bottom: 0;
@@ -176,7 +199,7 @@ width: 190px;
   left: 5px;
   display: block;
   /* يمتد بعرض الصفحة بالكامل */
-  background-color: #ffffff;
+  background-color: transparent;
   /* يمكنك إضافة خلفية حسب الحاجة */
   height: 53px;
   /* إضافة بعض التباعد الداخلي */
@@ -242,6 +265,12 @@ width: 190px;
   position: fixed;
   top: 120px;
 
+}
+.titre_button_catalg{
+  font-size: 20px;
+}
+.category{
+  margin-left: 20px;
 }
 
 @media (max-width: 1406px) {
@@ -360,9 +389,9 @@ border: transparent solid;
 }
 
 
-@media (max-width: 380px) {
+@media (max-width: 381px) {
   .product-grid {
-    grid-template-columns: repeat(auto-fill, minmax(107px, 2fr));
+    grid-template-columns: repeat(auto-fill, minmax(150px, 2fr));
 
 
 
@@ -380,13 +409,16 @@ border: transparent solid;
   }
 
 }
-@media (max-width: 319px) {
+@media (max-width: 339px) {
 
-  .button_catag_navbar{
-    display: none;
+
+
+  .product-grid {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 2fr));
+
+
+
   }
-
-  
 }
 
 ul {
@@ -481,6 +513,7 @@ li {
 .nome_buttonPrécédente{
   margin-right: 15px;
 }
+
 .button_up {
   z-index: 900;
   position: fixed;

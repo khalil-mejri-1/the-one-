@@ -1,10 +1,12 @@
 .carousel_home{
-    width:95%;
+    width:101%;
     position: relative;
     top: -120px;
-    border-radius: 20px;
+    left: -5px;
     margin: auto;
+    border-radius: 0px;
     
+
     border:  rgb(255, 255, 255) solid 3px;
 }
 
@@ -17,7 +19,6 @@
   height: 40px;
   top: 50%; /* لضبطها في المنتصف عمودياً */
   transform: translateY(-50%); /* لضبطها في المنتصف بشكل صحيح */
-  border: #FF416C solid 1px;
 }
 
 
@@ -30,7 +31,10 @@
 
 .carousel-control-prev{
     margin-left: 20px;
+    border: #FF416C solid 4px;
     transition: 0.1s;
+    width: 50px;
+    height: 50px;
     
 }
 .carousel-control-prev:hover{
@@ -42,6 +46,10 @@
 .carousel-control-next{
     margin-right: 20px;
     transition: 0.1s;
+    width: 50px;
+    height: 50px;
+    border: #FF416C solid 4px;
+
     
 
 }
@@ -75,147 +83,159 @@ background-color: #d30f3d;
 }
 
 .d-block{
-
-        width: 100%;
-      border-radius: 10px;
-        height: 650px;
-}
-@media (max-width: 1170px) {
-    .d-block{
-
-       
-        height: 530px;
-}
-.button_carousel{
-  
-width: 200px;
-padding: 6px;
-
+       width: 100%;
+   
     
 }
-.name_button{
-    font-size: 15px;
-    position: relative;
-    top: -2px;
- }
- }
- @media (max-width: 1000px) {
-    .d-block{
-
-       
-        height: 450px;
-}
-.button_carousel{
+.titre_img{
+    position: absolute;
+    top: 00px;
+    left: 50%;
+    transform: translate(-50%,50px); /* تعديل */
+    font-size: 700%;
+width: 100%;
+    text-shadow: 
+    0 0 10px rgba(1, 245, 245, 0.5),
+    0 0 20px rgba(12, 44, 44, 0.952),
+    0 0 30px rgba(0, 56, 56, 0.5),
+    0 0 40px rgba(0, 255, 255, 0.5)
   
-    width: 200px;
-    padding: 6px;
-    
-        
+
+    ;
+    border: transparent solid;
+    color: white;
+    text-align: center;
+}
+.next{
+    width: 40px;
+    margin-left: 10px;
+
+
+}
+.button_next {
+    padding: 10px 30px; /* تقليل الحشوة لجعل الزر متناسبًا */
+    position: absolute; /* تغيير الموضع لضمان التثبيت النسبي إلى العنصر الأب */
+    left: 15%; /* تمركز الزر أفقيًا */
+    bottom: 50px;
+    font-weight: 700;
+    font-size: 20px; /* حجم خط مناسب */
+    color: white;
+    border-radius: 50px;
+    border: none; /* إزالة الحدود */
+    background-color: #FF416C;
+   
+    transition:  0.3s ease;
+    animation: move 2s infinite; /* تأثير الحركة */
+  }
+  
+  .button_next:hover {
+    transform: translate(-50%, -50%) scale(1.1); /* تكبير الزر عند التمرير */
+    box-shadow: 
+      0 0 0px rgba(255, 65, 108, 0.7),
+      0 0 10px rgba(255, 65, 108, 1),
+      0 0 10px rgba(255, 65, 108, 1);
+      background-color: #d30f3d;
+  }
+img{
+    border: none;
+  }
+  
+  @keyframes move {
+    0%, 100% {
+      transform: translate(-50%, -50%) translateY(-20px); /* حركة للأعلى */
     }
-    .button_carousel{
-  
-        width: 150px;
-        padding: 3px;
-        
-            
-        }
-        .name_button{
-            font-size: 12px;
-            position: relative;
-            top: -2px;
-         }
-    
- }
-
- @media (max-width: 850px) {
-    .d-block{
-
-       
-        height: 400px;
-}
- .carousel-control-prev-icon,
-.carousel-control-next-icon {
-  width: 15px;
-}
-.carousel-control-next,.carousel-control-prev{
-    width: 30px;
-    height: 30px;   
-}
-.button_carousel{
-  
-    width: 130px;
-    padding: 3px;
-    
-        
+    50% {
+      transform: translate(-50%, -50%) translateY(10px); /* حركة للأسفل */
     }
-    .name_button{
-        font-size: 11px;
+  }
+  
+@media (max-width: 1400px) {
+    .d-block{
+        width: 130%;
         position: relative;
-        top: -3px;
-     }
-
-}
-
- 
- @media (max-width: 650px) {
-    .d-block{
-
-       
-        height: 300px;
-}
-.button_carousel{
-  
- top: 10px;
-        
-    }
- }
- @media (max-width: 550px) {
-    .d-block{
-
-       
-        height: 250px;
-}
- 
-.button_carousel{
-  
-    width: 120px;
-    padding: 0px;
+        left: -30%;
     
-        
-    }
-    .name_button{
-        font-size: 10px;
-      
-     }
-
+     
+ }
+ .button_next{
+    font-size: 15px; /* حجم خط مناسب */
 
  }
- @media (max-width: 450px) {
-    .d-block{
-
-       
-        height: 200px;
-}
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-  width: 10px;
-}
-.carousel-control-next,.carousel-control-prev{
-    width: 20px;
-    height: 20px;   
-}
-.button_carousel{
-  
-    width: 100px;
-    height: 25px;
     
-        
-    }
-    .name_button{
-        font-size: 8px;
-        top: -8px;
-      
-     }
- 
+}
+@media (max-width: 1065px) {
+ .button_next{
+    font-size: 15px; /* حجم خط مناسب */
+padding: 5px 30px;
+bottom: 10px;
+left: 190px;
  }
+    
+}
+@media (max-width: 769px) {
+    .next{
+        width: 30px;
+    } 
+   }
+
+@media (max-width: 610px) {
+    .d-block{
+       width: 160%;
+       left: -30%;
+     
+ }
+ .button_next{
+padding: 3px 10px;
+font-size: 14px;
+left: 120px;
+bottom: 10px;
+ }
+
+ .next{
+    width: 30px;
+ }
+   
  
+ @keyframes move {
+    0%, 100% {
+      transform: translate(-50%, -50%) translateY(-10px); /* حركة للأعلى */
+    }
+    50% {
+      transform: translate(-50%, -50%) translateY(5px); /* حركة للأسفل */
+    }
+  }
+}
+@media (max-width: 426px) {
+    .d-block{
+       width: 190%;
+       left: -60%;
+     
+ }
+    
+}
+
+@media (max-width: 376px) {
+    .d-block{
+       width: 230%;
+       left: -80%;
+     
+ }
+ .button_next{
+    padding: 3px 10px;
+    font-size: 12px;
+    left: 90px;
+    bottom: 0px;
+     }
+     .next{
+        width: 30px;
+     }
+       
+}
+@media (max-width: 32px) {
+    .d-block{
+       width: 250%;
+       left: -100%;
+     
+ }
+    
+}

@@ -2,7 +2,7 @@
 .product-page {
     display: flex;
     position: relative;
-    top: 120px;
+    top: 0px;
     padding: 10px;
     max-width: 1700px;
     border-radius: 10px;
@@ -109,16 +109,17 @@
     color: white; /* White text for contrast */
     border-color: #1c1c4e; /* Match border with background */
   }
-
   .selected {
-    background-color: transparent;
-    color: black;
-
-    border-radius: 3px;
-    border-bottom:#FF416C  solid  ;
-
+    background-color: transparent; /* خلفية شفافة */
+    color: black; /* لون النص */
+    border-radius: 3px; /* حواف مدورة بشكل خفيف */
+    border-left: #FF416C solid 7px; /* الحد الأيسر بلون مميز */
+    border-top: #FF416C solid 0px; /* الحد العلوي بلون مميز */
+    border-bottom: #FF416C solid 0px; /* الحد السفلي بلون مميز */
+    padding: 10px; /* مسافة داخلية حول المحتوى */
   }
   
+ 
   /* Add to Cart Button */
   .add-to-cart {
     background-color: #FF416C;
@@ -127,7 +128,8 @@
     font-size: 16px;
     font-weight: 600;
     position: relative;
-    left: 10px;
+    left: 0px;
+    width: 100%;
     border: none;
     cursor: pointer;
     border-radius: 6px;
@@ -170,8 +172,18 @@
     font-size: 16px;
     color: #555;
   }
-
-  
+.bloc_carosel_product{
+  border: transparent solid;
+}
+.truncat {
+  display: block;
+  max-width: 90%; /* الحد الأقصى للعرض */
+  overflow: hidden;
+  color: #070707;
+  text-overflow: ellipsis; /* تحويل النص إلى نقاط */
+  white-space: nowrap; 
+  position: absolute;/* منع الانتقال إلى سطر جديد */
+}
   @media (max-width: 1303px) {
 .bloc_img_product{
   width: 500px;

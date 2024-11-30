@@ -24,7 +24,7 @@ const Offcanva = ({ currentPage, setSelectedCategory }) => {
   const [showMainOffcanvas, setShowMainOffcanvas] = useState(false);
   const [showAnimeOffcanvas, setShowAnimeOffcanvas] = useState(false);
   const [stickers, setStickers] = useState([]);
-  const [selectedCategory, setSelectedCategoryState] = useState("naruto"); // حالة لتخزين الفئة المحددة
+  const [selectedCategory, setSelectedCategoryState] = useState(""); // حالة لتخزين الفئة المحددة
   const navigate = useNavigate();
 
   // التحكم في إظهار وإخفاء النوافذ الجانبية
@@ -74,14 +74,17 @@ const Offcanva = ({ currentPage, setSelectedCategory }) => {
           return naruto;
       }
     };
-    setStickers(fetchStickers(selectedCategory)); // استخدام الفئة المحددة
-  }, [selectedCategory]);
+    setStickers(fetchStickers(selectedCategory)); 
+
+  }, [selectedCategory])
+  ;
 
   const handleCategoryChange = (category) => {
     setSelectedCategoryState(category); // تغيير الفئة المحددة
     setSelectedCategory(category); // تحديث الفئة في المكون الأب
     navigate("/shop", { state: { selectedCategory: category } });
     toggleAnimeOffcanvas();
+    window.scrollTo(0, 0);
   };
 
   return (
@@ -89,10 +92,10 @@ const Offcanva = ({ currentPage, setSelectedCategory }) => {
       {/* زر فتح النافذة الرئيسية */}
       <div className="bloc_button_catg_navbar">
         <button onClick={toggleMainOffcanvas} className="button_catag_navbar">
-          <i className="pi pi-align-center">
+          <i className="pi pi-align-center pi-align-center1 ">
             <span
               className="titre_button_catalg"
-              style={{ marginLeft: "5px", position: "relative", top: "-3px" }}
+              style={{ marginLeft: "10px", position: "relative", top: "-2px" }}
             >
               Categories
             </span>
@@ -102,7 +105,7 @@ const Offcanva = ({ currentPage, setSelectedCategory }) => {
 
       <div className="footer_2">
         <button onClick={toggleMainOffcanvas} className="button_catag">
-          <i className="pi pi-align-center"></i>
+          <i className="pi pi-align-center  pi-align-center2"></i>
         </button>
       </div>
 
@@ -165,25 +168,20 @@ const Offcanva = ({ currentPage, setSelectedCategory }) => {
           <Offcanvas.Title>
             <div className="img_offcanves">
               <img src={img1} alt="Anime" style={{ width: "100%", height: "100%" }} />
-            </div>
-          </Offcanvas.Title>
-          <button
-            onClick={() => {
+              <i className="pi pi-arrow-left " style={{ fontSize: '1.5rem',  position:"absolute", color:"white",right:"20px", top:"25px", float:"right", fontWeight:"900"}}   onClick={() => {
               toggleAnimeOffcanvas();
               setShowMainOffcanvas(true);
-            }}
-            className="btn btn-link"
-            style={{ textDecoration: "none", color: "#FF416C", fontSize: "1.2rem" }}
-          >
-            <i className="pi pi-angle-left"></i>
-          </button>
+            }}></i>
+            </div>
+          </Offcanvas.Title>
+        
         </Offcanvas.Header>
         <Offcanvas.Body>
           <br />
+      
+      
           <br />
-          <br />
-          <br />
-          <ul style={{ marginTop: "10px" }}>
+          <ul style={{ marginTop: "65px" }}>
             <li>
               <i
                 className="pi pi-angle-right"
@@ -227,7 +225,7 @@ const Offcanva = ({ currentPage, setSelectedCategory }) => {
                 className={`anime-item ${selectedCategory === "hxh" ? "selected" : ""}`}
                 onClick={() => handleCategoryChange("hxh")}
               >
-                HxH
+                Hanter X Hanter
               </button>
 
               <br />

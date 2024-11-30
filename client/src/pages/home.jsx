@@ -43,9 +43,10 @@ const Home = () => {
     // التعامل مع تغيير الفئة وإعادة تعيين الصفحة إلى 0
     const handleCategoryChange = (category) => {
         setSelectedCategory(category);
-        setCurrentPage(0); // إعادة تعيين الصفحة إلى 0 عند تغيير الفئة
-    };
-
+        sessionStorage.setItem("selectedCategory", category);  // Save selected category to sessionStorage
+        setCurrentPage(0); // Reset page to 0 when changing category
+      };
+    
     // عند النقر على زر أو إجراء آخر، إعادة تعيين الصفحة إلى 0
 
     return (

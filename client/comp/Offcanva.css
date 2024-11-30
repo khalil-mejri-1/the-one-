@@ -5,10 +5,20 @@
     right: 20px;
     top:15px;
     border:  transparent solid;
-    color: antiquewhite;
+  font-size: 1.4rem; position: relative; top: 3px;
+   margin-right: 0px;
+     left:0px;
+
     
    
 }
+.pi-align-center1{
+    font-size: 20px;
+}
+.pi-align-center2{
+    font-size: 15px;
+}
+
 .img_offcanves{
     border: transparent solid 0px;
     position: absolute;

@@ -23,7 +23,7 @@ const Admin = () => {
         }
     
         try {
-            const response = await fetch(`http://localhost:3000/api/kimetsu`, {
+            const response = await fetch(`https://the-one-opal.vercel.app/api/kimetsu`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

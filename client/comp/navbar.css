@@ -1,30 +1,89 @@
+.logo {
+  border: transparent solid;
+  width: 165px;
+  position: relative;
+
+
+top: 10px;
+  height: 55px;
+}
+
 .logi_img {
   width: 3em;
   position: relative;
-  top: 18px;
+  border: transparent solid;
   cursor: pointer;
 }
 
+.titre {
+  font-size: 38px;
+  font-weight: 700;
 
-.one{
-  color: #FF416C;
+  position: relative;
+  top: -50px;
+  margin-left: 52px;
+
+    font-family: "Bebas Neue", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+  
+  
+ color: rgb(4, 1, 39);
+  transition: 0.3s;  
+  cursor: pointer;
 }
-
 .search-container {
   display: flex;
-  width: 100%;
 
-  border: 3px solid transparent;
+
+  border: 3px solid bl;
   border-radius: 50px;
   padding: 5px;
   background-color: #f3f3f6;
   background-clip: padding-box;
   /* لمنع تأثير التدرج على الخلفية */
   position: relative;
-  top: 1px;
+  top: 20px;
   animation: border-animation 3s linear infinite;
 }
+.search-container_dialog{
 
+width: 100%;
+margin: auto;
+margin-top: 0px;
+  border-top:0px solid rgb(0, 0, 0);
+
+  border-radius: 50px;
+  padding: 5px;
+  background-color: #f7f7f7;
+  position: absolute;
+left: 0px;
+
+
+}
+
+.MuiTypography-root{border: transparent solid;
+width: 100%;
+margin: auto;
+height: 100%;
+position: relative;
+
+}
+.MuiPaper-root{
+  width: 100%;
+  height: 700px;
+
+}
+.MuiDialogContent-root{
+position: absolute;
+border: transparent solid;
+width: 100%;
+height: 100%;
+
+
+
+
+}
 .search-container::before {
   content: "";
   z-index: 51;
@@ -36,70 +95,25 @@
   border-radius: 50px;
   background: linear-gradient(
     90deg,
-    #ff0000, /* Red */
-    #ff7f00, /* Orange */
-    #ffff00, /* Yellow */
-    #7fff00, /* Light Green */
-    #00ff00, /* Green */
-    #00ff7f, /* Spring Green */
-    #00ffff, /* Cyan */
-    #007fff, /* Sky Blue */
-    #0000ff, /* Blue */
-    #7f00ff, /* Violet */
-    #ff00ff, /* Magenta */
-    #ff007f, /* Rose */
-    #ff0000, /* Red */
-    #ff1a00,
-    #ff3300,
-    #ff4d00,
-    #ff6600,
-    #ff8000,
-    #ff9900,
-    #ffb300,
-    #ffcc00,
-    #ffe600,
-    #e6ff00,
-    #ccff00,
-    #99ff00,
-    #66ff00,
-    #33ff00,
-    #00ff00,
-    #00ff33,
-    #00ff66,
-    #00ff99,
-    #00ffcc,
-    #00ffff,
-    #00ccff,
-    #0099ff,
-    #007fff,
-    #0055ff,
-    #0033ff,
-    #001aff,
-    #0000ff,
-    #1a00ff,
-    #3300ff,
-    #4d00ff,
-    #6600ff,
-    #8000ff,
-    #9900ff,
-    #b300ff,
-    #cc00ff,
-    #e600ff,
-    #ff00e6,
-    #ff00cc,
-    #ff00b3,
-    #ff0099,
-    #ff007f,
-    #ff0066,
-    #ff0055,
-    #ff0044,
-    #ff0033,
-    #ff0022,
-    #ff0011
-  );
+    #ff0000,   /* Red */
+    #ff0a00,   #ff1400,   #ff1e00,   #ff2800,   #ff3200,   #ff3c00,   #ff4600,   #ff5000,   #ff5a00,   #ff6400, 
+    #ff6e00,   #ff7800,   #ff8200,   #ff8c00,   #ff9600,   #ffa000,   #ffaa00,   #ffb400,   #ffbe00,   #ffc800, 
+    #ffd200,   #ffdc00,   #ffe600,   #fff000,   #fffa00,   /* Yellow */
+    #d4ff00,   #a8ff00,   #7dff00,   #51ff00,   #26ff00,   #00ff00, 
+    #00ff26,   #00ff51,   #00ff7d,   #00ffa8,   #00ffd4,   /* Green */
+    #00fffc,   #00e6ff,   #00c8ff,   #00aaff,   #008cff,   #0077ff,   #0061ff,   #004dff,   #0038ff,   #0022ff, 
+    #0014ff,   #0000ff,   /* Blue */
+    #1a00ff,   #3300ff,   #4d00ff,   #6600ff,   #8000ff,   #9900ff,   #b300ff,   #cc00ff,   #e600ff,   /* Violet */
+    #ff00e6,   #ff00cc,   #ff00b3,   #ff0099,   #ff007f,   #ff0066,   #ff0055,   #ff0044,   #ff0033,   #ff0022, 
+    #ff0011    /* Magenta */
+);
+
     z-index: -1;
   background-size: 400%;
-  animation: gradientAnimation 5s linear infinite;
+  animation: gradientAnimation 10s linear infinite;
+}
+.search-popup{
+  position: absolute;
 }
 
 @keyframes gradientAnimation {
@@ -120,20 +134,43 @@
   flex-grow: 1;
   border: none;
   outline: none;
+width: 80%;
+margin-top: 0px;
+
+position: absolute;
+
   background-color: transparent;
   padding: 6px;
+  color: rgb(0, 0, 0);
+  font-weight: 500;
   font-size: 1rem;
 }
+
+.titre_res{
+  color: black;
+  position: relative;
+  width: 100%;
+  border: transparent solid;
+
+}
+
 
 .search-button {
   background-color: transparent;
   border: none;
   width: 30px;
   float: right;
+  position: relative;
   cursor: pointer;
   font-size: 20px;
 }
-
+.icon_serche_nav-bar{
+  font-size: 20px;
+  position: relative;
+font-weight: 800;
+font-size: xlarge;
+  border: transparent solid;
+}
 .bloc_navbar_tlf_serche {
   border: transparent solid 1px;
   height: 65px;
@@ -156,22 +193,7 @@
   height: 60px;
 }
 
-.titre {
-  font-size: 38px;
-  font-weight: 700;
-  margin-left: 55px;
-  position: relative;
-  top: -28px;
 
-    font-family: "Bebas Neue", sans-serif;
-    font-weight: 700;
-    font-style: normal;
-  
-  
- color: rgb(4, 1, 39);
-  transition: 0.3s;  
-  cursor: pointer;
-}
 
 .bloc_complait_nav {
   border: transparent solid;
@@ -208,6 +230,41 @@
   top: calc(-85px + 21px);
  
 }
+.resulta_rech{
+ color: black;
+margin: 5px ;
+  font-weight:500; 
+  border: transparent solid;
+  position: relative;
+  left: -40px;
+  padding-left: 30px;
+  padding-right: 6px;
+  padding-top: 6px;
+  border-radius: 50px;
+  padding-bottom: 6px;
+
+
+
+}
+.resulta_rech:hover{
+  border: #d3d3d3 solid;
+
+
+ }
+ 
+
+
+.p-button-warning{
+  width: 100.2%;
+  left: -1px;
+  border: transparent solid;
+  height: 40px;
+  top: -2px;
+  border-radius: 50px;
+  height: 49px;
+  position: absolute;
+  background-color: transparent;
+}
 .bloc_button_card{
   border: transparent solid;
   position: fixed;
@@ -243,29 +300,21 @@
   cursor: pointer;
 }
 .shopicon_footer2{
-  float: right;
-  right: 20px;
-  position: relative;
-  top: 12px;
-
-  z-index: 100;
+  font-size: 17px;
 }
+
 .bloc_footer2{
   border:transparent solid 1px;
   position: fixed;
-  /* استخدام position: fixed لتثبيت العنصر */
-  bottom: 0;
   /* تثبيته عند أسفل الصفحة */
-  width: 100%;
-  height: 45px;
+  
+bottom: 9px;
+float: right;
+right: 10px;
   display: none;
 z-index: 100;
   /* يمتد بعرض الصفحة بالكامل */
-  background-color: transparent;
-  /* يمكنك إضافة خلفية حسب الحاجة */
-  /* إضافة بعض التباعد الداخلي */
-  /* لمحاذاة المحتوى في المنتصف */
-  /* للتأكد من ظهور العنصر فوق المحتوى الآخر */
+ 
 
 }
 /* إخفاء شريط التمرير الأفقي للصفحة */
@@ -329,7 +378,7 @@ z-index: 100;
   /* يمكنك إضافة خلفية حسب الحاجة */
   /* إضافة بعض التباعد الداخلي */
   text-align: center;
- padding: 10px;
+ padding: 0px;
   /* لمحاذاة المحتوى في المنتصف */
   z-index: 100;
   /* للتأكد من ظهور العنصر فوق المحتوى الآخر */
@@ -354,6 +403,16 @@ z-index: 100;
   /* استخدام "-" للفصل بين الكلمات */
   transition: 0.2s;
 }
+.pi-search{
+  position: relative;
+  top: 1px;
+  right: 10px;
+}
+.sershfooter{
+  position: relative;
+  top: -10px;
+}
+
 .pi-home{
   position: relative;
   /* تأكد من أن القيم هي خصائص CSS صحيحة */
@@ -363,7 +422,7 @@ z-index: 100;
   /* إزالة علامات الاقتباس حول القيم */
   display: block;
   /* استخدام "-" للفصل بين الكلمات */
- top: 1px;
+ top: -9px;
 
   z-index: 100;
   /* استخدام "-" للفصل بين الكلمات */
@@ -382,14 +441,6 @@ z-index: 100;
 }
 
 
-.logo {
-  border: transparent solid;
-  width: 245px;
-  position: relative;
-  top: -7px;
-  left: -10px;
-  height: 72px;
-}
 
 
 @media (max-width: 1209px) {
@@ -445,15 +496,9 @@ z-index: 100;
   }
 
 
-  .titre {
-    position: relative;
-    left: 20%;
-    transform: translate(-30%, 0%);
-    /* لتحريكها لتكون في المنتصف تمامًا */
-
-  }
-
-
+.logo{
+  margin: auto;
+}
 
 
   .button_over_categori {
@@ -467,17 +512,7 @@ z-index: 100;
   }
   
 
-  .logo {
-    margin: auto;
-    border: transparent solid;
-    top: -5px;
-
-  }
-  .search-input {
-   
-    width: 100%;
-   
-  }
+ 
   .bloc_navbar_tlf_serche {
    display: block;
   }
