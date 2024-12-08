@@ -2,13 +2,31 @@ const express = require('express');
 const mongoose = require('mongoose');
 const Naruto = require('./models/anime/naruto'); // Import the Naruto model
 const Onepiece = require('./models/anime/onepiece'); // Import the Onepiece model
+const death_note = require('./models/anime/death_note'); // Import the Hxh model
+const jujutsu_kaisen = require('./models/anime/jujutsu_kaisen'); // Import the Hxh model
+
 const Hxh = require('./models/anime/hxh'); // Import the Hxh model
+const berserk = require('./models/anime/berserk'); // Import the Kimetsu model
+const vinland_saga = require('./models/anime/vinland_saga'); // Import the Kimetsu model
+const Art_numérique = require('./models/anime/Art numérique'); // Import the Kimetsu model
+const van_gogh = require('./models/anime/van gogh'); // Import the Kimetsu model
+const attack_on_titan = require('./models/anime/attack on titan'); // Import the Kimetsu model
+const monalisa = require('./models/anime/monalisa'); // Import the Kimetsu model
+const Fille = require('./models/Fille/Fille'); 
+const beststckres = require('./models/best_stickres/beststick'); 
+
+
+const SpongeBob = require('./models/cartoon/SpongeBob'); // Import the Kimetsu model
+
 const kimetsu = require('./models/anime/kimetsu'); // Import the Kimetsu model
+const Detective_Conan = require('./models/anime/Detective_Conan'); // Import the Kimetsu model
+
 const Command = require('./models/command'); // Import the Command model
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 const cors = require('cors');
+const beststick = require('./models/best_stickres/beststick');
 
 app.use(cors()); // Enable CORS for cross-origin requests
 app.use(express.json()); // Middleware to parse JSON requests
@@ -27,74 +45,69 @@ const connectDB = async () => {
 
 connectDB();
 
+
+
+
+  // إنشاء كائن يحتوي على الفئات والنماذج المرتبطة بها
+  const categoryModels = {
+    "Naruto": Naruto,
+    "One Piece": Onepiece,
+    "Hunter X Hunter": Hxh,
+    "Death Note": death_note,
+    "Kimetsu": kimetsu,
+    "Jujutsu Kaisen": jujutsu_kaisen,
+    "Detective Conan": Detective_Conan,
+    "Berserk": berserk,
+    "Vinland Saga": vinland_saga,
+    "Art Numérique": Art_numérique,
+    "Van Gogh": van_gogh,
+    "Attack On Titan": attack_on_titan,
+    "Monalisa": monalisa,
+    "Fille": Fille,
+    "SpongeBob": SpongeBob,
+    "beststckres": beststckres
+  };
+  
+
 // Home route
 app.get('/', (req, res) => {
     res.send('Hello orld!');
 });
 
 // نقطة نهاية لجلب منتج معين حسب المعرف
-app.get(`/product/:category`, async (req, res) => {
-    try {
-      const { category } = req.params; // استخراج الفئة من الرابط
-      let Model; // تعريف المتغير Model
-  
-      // تحديد النموذج بناءً على الفئة
-      switch (category) {
-        case "naruto":
-          Model = Naruto;
-          break;
-        case "onepiece":
-          Model = Onepiece;
-          break;
-        case "hxh":
-          Model = Hxh;
-          break;
-        case "bleach":
-          Model = Bleach; // تأكد من أن لديك نموذج Bleach أيضًا
-          break;
-        case "kimetsu":
-          Model = kimetsu;
-          break;
-        default:
-          return res.status(400).send("فئة غير صالحة");
-      }
-  
-      // البحث عن جميع المنتجات في الفئة المحددة
-      const products = await Model.find();
-  
-      if (products.length === 0) {
-        return res.status(404).json({ message: 'لا توجد منتssssجات في هذه الفئة' });
-      }
-  
-      // إرسال بيانات المنتجات كرد
-      res.json(products);
-    } catch (error) {
-      console.error('Error fetching products:', error);
-      res.status(500).json({ message: 'خطأ في الخادم' });
-    }
-  });
-  
 
-// Add a new product to a category
-app.post('/product/:category', async (req, res) => {
+app.get('/product/:category', async (req, res) => {
     const { category } = req.params;
 
-    let Model;
-    switch (category) {
-        case "naruto":
-            Model = Naruto;
-            break;
-        case "onepiece":
-            Model = Onepiece;
-            break;
-        case "hxh":
-            Model = Hxh;
-            break;
-        case "kimetsu":
-            Model = kimetsu;
-            break;
-        default:
-            return res.status(400).send("Invalid category");
+    const Model = categoryModels[category];
+
+    if (!Model) {
+      return res.status(400).send("فئة غير صالحة");
+    }
+
+    try {
+      const products = await Model.find();
+
+      if (products.length === 0) {
+        return res.status(404).json({ message: 'لا توجد منتجات في هذه الفئة' });
+      }
+
+      res.json(products);
+    } catch (error) {
+      console.error('خطأ في جلب المنتجات:', error);
+      res.status(500).json({ message: 'خطأ في الخادم' });
+    }
+});
+  
+
+// إضافة منتج جديد إلى فئة معينة
+app.post('/api/:category', async (req, res) => {
+    const { category } = req.params;
+
+    const Model = categoryModels[category];
+
+    if (!Model) {
+      return res.status(400).send("فئة غير صالحة");
     }
 
     try {
@@ -102,12 +115,31 @@ app.post('/product/:category', async (req, res) => {
         const newPost = new Model({ title, image, price, originalPrice, discount });
         await newPost.save();
 
-        res.status(201).json({ message: 'Product added successfully', data: newPost });
+        res.status(201).json({ message: 'تم إضافة المنتج بنجاح', data: newPost });
     } catch (error) {
-        console.error('Error adding product:', error);
-        res.status(500).json({ message: 'Error adding product' });
+        console.error('حدث خطأ أثناء إضافة المنتج:', error);
+        res.status(500).json({ message: 'حدث خطأ أثناء إضافة المنتج' });
     }
 });
+
+
+
+// Get all products
+app.get('/beststckres', async (req, res) => {
+    try {
+        // Get all products with selected fields (title, image, price, etc.)
+        const products = await beststick.find({}, 'title image price originalPrice discount'); 
+        res.json(products); // Return the data for the products
+    } catch (error) {
+        console.error('Error fetching products:', error);
+        res.status(500).json({ message: 'Server error fetching products' });
+    }
+  });
+  
+
+
+
+
 
 
 app.post('/commands', async (req, res) => {
@@ -295,6 +327,30 @@ app.get("/command/:nb", async (req, res) => {
 
 
 
+// نقطة النهاية لحذف منتج بناءً على الفئة والـ id
+app.delete('/products/:category/:_id', async (req, res) => {
+    const { category, _id } = req.params;
+
+    // الحصول على النموذج بناءً على الفئة
+    const Model = categoryModels[category];
+
+    if (!Model) {
+      return res.status(400).send("فئة غير صالحة");
+    }
+
+    try {
+      const deletedProduct = await Model.findByIdAndDelete(_id);
+
+      if (!deletedProduct) {
+        return res.status(404).json({ message: 'لم يتم العثور على المنتج' });
+      }
+
+      res.status(200).json({ message: 'تم حذف المنتج بنجاح' });
+    } catch (error) {
+      console.error('حدث خطأ أثناء الحذف:', error);
+      res.status(500).json({ message: 'حدث خطأ أثناء الحذف' });
+    }
+});
 
 // Start server
 app.listen(PORT || process.env.PORT, () => {
