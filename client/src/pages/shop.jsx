@@ -11,11 +11,14 @@ import "./shop.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function Shop() {
+
+    const  prix=0.6;
+
   const location = useLocation();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
-
   const [stickers, setStickers] = useState([]);
+    const [backtopbutton, setBacktopbutton] = useState(false);
 
   const { selectedCategory } = location.state || {};
 
@@ -64,6 +67,31 @@ function Shop() {
       });
     }
   };
+
+  useEffect(() => {
+    const handleScroll = () => {
+        if (window.scrollY > 100) {
+            setBacktopbutton(true);
+        } else {
+            setBacktopbutton(false);
+        }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    // تنظيف مستمع التمرير عند الخروج من الصفحة
+    return () => {
+        window.removeEventListener("scroll", handleScroll);
+    };
+}, []);
+
+// دالة التمرير إلى أعلى الصفحة
+const scrollup = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+};
+
+
+
 
   useEffect(() => {
     const savedScrollPosition = localStorage.getItem("scrollPosition");
@@ -147,6 +175,8 @@ function Shop() {
     navigate(`/product/${selectedCategory}/${sticker._id}`, {
       state: { ...sticker, selectedSize: "6 cm" }, // إرسال الحجم مع باقي البيانات
     });
+    window.scrollTo(0, 0);  // Scroll to the top (0,0) is the correct value)
+
   };
   const handleCategoryChange = (category) => {
     sessionStorage.setItem("selectedCategory", category); // حفظ الفئة المختارة في sessionStorage
@@ -429,6 +459,14 @@ function Shop() {
   
   return (
     <>
+     <div>
+                {backtopbutton && (
+                    <button type="button" className="button_up" onClick={scrollup}>
+                        <i className="pi pi-angle-up" style={{ fontSize: '2rem', color: "white" }}></i>
+                    </button>
+                )}
+            </div>
+
 
       {/* الرسالة */}
       {showMessage && (
@@ -477,7 +515,7 @@ function Shop() {
       <div className="bloc_stickres_all">
         <div className="stickres_bloc">
        
-            <h3  className="titrebeststick category">  Categories:  {selectedCategory} </h3>
+            <h3  className="titrebeststick category">  Categories:  {selectedCategory} ({stickers.length})</h3>
 
 <br /><br /><br /><br /><br />
 <div className="product-grid">
@@ -497,7 +535,7 @@ function Shop() {
     <p className="truncate">{sticker.title}</p>
     <Card.Text className="product-price">
       <span className="original-price">{sticker.originalPrice} DT</span>
-      <span className="discounted-price">{sticker.price} DT</span>
+      <span className="discounted-price">{prix} DT</span>
     </Card.Text>
 
     <button

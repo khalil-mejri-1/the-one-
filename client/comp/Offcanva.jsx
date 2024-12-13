@@ -2,121 +2,60 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Offcanva.css";
-import hxh from "../api/anime/hxh.json";
-import naruto from "../api/anime/naruto.json";
-import onepiece from "../api/anime/onepiece.json";
-import kimetsu from "../api/anime/kimetsu.json";
-import death_note from "../api/anime/death_note.json";
-import attackontitan from "../api/anime/attackontitan.json";
-import berserk from "../api/anime/berserk.json";
-import bokonohero from "../api/anime/bokonohero.json";
-import bleach from "../api/anime/bleach.json";
-import conan from "../api/anime/conan.json";
-import dragonboll from "../api/anime/dragonboll.json";
-import ippo from "../api/anime/ippo.json";
-import jujutsu from "../api/anime/jujutsu.json";
-import OnePunchMan from "../api/anime/OnePunchMan.json";
-import sololeveling from "../api/anime/sololeveling.json";
-import vinlandsaga from "../api/anime/vinlandsaga.json";
+import { Avatar } from 'primereact/avatar';
+
 import img1 from "../img/1.jpg";
 
-const Offcanva = ({ currentPage, setSelectedCategory }) => {
+const Offcanva = () => {
   const [showMainOffcanvas, setShowMainOffcanvas] = useState(false);
-  const [showAnimeOffcanvas, setShowAnimeOffcanvas] = useState(false);
-  const [stickers, setStickers] = useState([]);
-  const [selectedCategory, setSelectedCategoryState] = useState(""); // حالة لتخزين الفئة المحددة
+  const [showSubOffcanvas, setShowSubOffcanvas] = useState(false);
+  const [subCategory, setSubCategory] = useState(""); // تحديد التصنيف الفرعي (أنمي أو فن)
   const navigate = useNavigate();
 
   // التحكم في إظهار وإخفاء النوافذ الجانبية
   const toggleMainOffcanvas = () => setShowMainOffcanvas((prev) => !prev);
-  const toggleAnimeOffcanvas = () => {
-    setShowAnimeOffcanvas((prev) => !prev);
+  const toggleSubOffcanvas = (category) => {
+    setSubCategory(category); // تحديد التصنيف الفرعي
+    setShowSubOffcanvas(true);
     setShowMainOffcanvas(false);
   };
 
-  useEffect(() => {
-    // تحميل البيانات بناءً على الفئة
-    const fetchStickers = (category) => {
-      switch (category) {
-        case "naruto":
-          return naruto;
-        case "hxh":
-          return hxh;
-        case "onepiece":
-          return onepiece;
-        case "kimetsu":
-          return kimetsu;
-        case "death_note":
-          return death_note;
-        case "attackontitan":
-          return attackontitan;
-        case "berserk":
-          return berserk;
-        case "bokonohero":
-          return bokonohero;
-        case "bleach":
-          return bleach;
-        case "conan":
-          return conan;
-        case "dragonboll":
-          return dragonboll;
-        case "ippo":
-          return ippo;
-        case "jujutsu":
-          return jujutsu;
-        case "OnePunchMan":
-          return OnePunchMan;
-        case "sololeveling":
-          return sololeveling;
-        case "vinlandsaga":
-          return vinlandsaga;
-        default:
-          return naruto;
-      }
-    };
-    setStickers(fetchStickers(selectedCategory)); 
 
-  }, [selectedCategory])
-  ;
 
+
+  
   const handleCategoryChange = (category) => {
-    setSelectedCategoryState(category); // تغيير الفئة المحددة
-    setSelectedCategory(category); // تحديث الفئة في المكون الأب
     navigate("/shop", { state: { selectedCategory: category } });
-    toggleAnimeOffcanvas();
+    setShowSubOffcanvas(false);
     window.scrollTo(0, 0);
   };
 
+
   return (
     <div>
-      {/* زر فتح النافذة الرئيسية */}
-      <div className="bloc_button_catg_navbar">
-        <button onClick={toggleMainOffcanvas} className="button_catag_navbar">
-          <i className="pi pi-align-center pi-align-center1 ">
-            <span
-              className="titre_button_catalg"
-              style={{ marginLeft: "10px", position: "relative", top: "-2px" }}
-            >
-              Categories
-            </span>
-          </i>
-        </button>
-      </div>
+    {/* زر فتح النافذة الرئيسية */}
+    <div className="bloc_button_catg_navbar">
+      <button onClick={toggleMainOffcanvas} className="button_catag_navbar">
+        <i className="pi pi-align-center pi-align-center1 ">
+          <span
+            className="titre_button_catalg"
+            style={{ marginLeft: "10px", position: "relative", top: "-2px" }}
+          >
+            Categories
+          </span>
+        </i>
+      </button>
+    </div>
 
-      <div className="footer_2">
-        <button onClick={toggleMainOffcanvas} className="button_catag">
-          <i className="pi pi-align-center  pi-align-center2"></i>
-        </button>
-      </div>
-
-      {/* نافذة الفئات الرئيسية */}
-      <Offcanvas show={showMainOffcanvas} onHide={toggleMainOffcanvas}>
-        <Offcanvas.Header>
-          <Offcanvas.Title>
-            <div className="img_offcanves">
-              <img src={img1} alt="Categories" style={{ width: "100%", height: "100%" }} />
-            </div>
-            <i
+    {/* نافذة الفئات الرئيسية */}
+   
+    <Offcanvas show={showMainOffcanvas} onHide={toggleMainOffcanvas}>
+      <Offcanvas.Header>
+        <Offcanvas.Title>
+          <div className="img_offcanves">
+            <img src={img1} alt="Categories" style={{ width: "100%", height: "100%" }} />
+          </div>
+          <i
               className="pi pi-times"
               onClick={toggleMainOffcanvas}
               style={{
@@ -129,125 +68,249 @@ const Offcanva = ({ currentPage, setSelectedCategory }) => {
                 top: "25px",
               }}
             ></i>
-          </Offcanvas.Title>
-        </Offcanvas.Header>
-        <Offcanvas.Body>
+        </Offcanvas.Title>
+      </Offcanvas.Header>
+      <br />
+      <br /> <br />
+      <br />
+      <Offcanvas.Body>
+        <ul>
+        
+          <li>
+              {/* <i className="pi pi-angle-right" style={{ marginRight: "5px" }}></i> */}
+              <Avatar image="https://i.pinimg.com/736x/75/79/c2/7579c2a9b52b5730b56f1d67e93e8571.jpg" style={{position:"relative",top:"8px"}}  shape="circle" />
+
+              <button
+                className="anime-item "
+                onClick={() => toggleSubOffcanvas("anime")}
+              >
+                Anime
+              </button>
+            </li>
+            <li>
+            <Avatar image="https://i.pinimg.com/736x/81/cf/e7/81cfe7edc34cd82e29ea06e149755105.jpg" style={{position:"relative",top:"8px"}}  shape="circle" />
+            <button
+                className="anime-item"
+                onClick={() => toggleSubOffcanvas("art")}
+              >
+                Art
+              </button>
+            </li>
+
+            <li>
+            <Avatar image="https://i.pinimg.com/736x/d2/f6/34/d2f63477bb751b769b2bc650f775fc63.jpg" style={{position:"relative",top:"8px"}}  shape="circle" />
+              <button
+                className={`anime-item ${subCategory === "Fille" ? "selected" : ""}`}
+                onClick={() =>{handleCategoryChange("Fille");   setShowMainOffcanvas(false)} 
+
+
+                 }
+              >
+                Fille
+              </button>
+            </li>
+
+            <li>
+            <Avatar image="https://i.pinimg.com/736x/6e/83/78/6e8378ac1d42bea0338c08c28d4342c5.jpg" style={{position:"relative",top:"8px"}}  shape="circle" />
+              <button
+                className="anime-item "
+                onClick={() => toggleSubOffcanvas("Cartoon")}
+              >
+                Cartoon
+              </button>
+            </li>
+        </ul>
+      </Offcanvas.Body>
+    </Offcanvas>
+
+    {/* نافذة الفئات الفرعية */}
+    <Offcanvas
+      show={showSubOffcanvas}
+      onHide={() => setShowSubOffcanvas(false)}
+      placement="start"
+    >
+      <Offcanvas.Header>
+        <Offcanvas.Title>
+        <div className="img_offcanves">
+            <img src={img1} alt="Categories" style={{ width: "100%", height: "100%" }} />
+          </div>
+          <i className="pi pi-arrow-left " style={{ fontSize: '1.5rem',  position:"absolute", color:"white",right:"20px", top:"25px", float:"right", fontWeight:"900" ,                cursor: "pointer",}}   onClick={() => {
+              setShowMainOffcanvas(true);
+              setShowSubOffcanvas(false);
+            }}></i>
+        </Offcanvas.Title>
+      </Offcanvas.Header>
+      <Offcanvas.Body>
+      <br />    <br />
+      <br />
+      <br />
+        {subCategory === "anime" && (
           <ul>
             <li>
-              <span
-                className={`caret ${showAnimeOffcanvas ? "caret-down" : ""}`}
-                onClick={toggleAnimeOffcanvas}
-              >
-                <br /> <br /> <br />
-                <p className="name_categ">
-                  <i
-                    className="pi pi-angle-right"
-                    style={{
-                      fontSize: "25px",
-                      position: "relative",
-                      top: "2px",
-                      marginRight: "5px",
-                    }}
-                  ></i>
-
-                  Anime
-                </p>
-              </span>
-            </li>
-          </ul>
-        </Offcanvas.Body>
-      </Offcanvas>
-
-      {/* نافذة الأنميات */}
-      <Offcanvas
-        show={showAnimeOffcanvas}
-        onHide={toggleAnimeOffcanvas}
-        placement="start"
-      >
-        <Offcanvas.Header>
-          <Offcanvas.Title>
-            <div className="img_offcanves">
-              <img src={img1} alt="Anime" style={{ width: "100%", height: "100%" }} />
-              <i className="pi pi-arrow-left " style={{ fontSize: '1.5rem',  position:"absolute", color:"white",right:"20px", top:"25px", float:"right", fontWeight:"900"}}   onClick={() => {
-              toggleAnimeOffcanvas();
-              setShowMainOffcanvas(true);
-            }}></i>
-            </div>
-          </Offcanvas.Title>
-        
-        </Offcanvas.Header>
-        <Offcanvas.Body>
-          <br />
-      
-      
-          <br />
-          <ul style={{ marginTop: "65px" }}>
-            <li>
-              <i
-                className="pi pi-angle-right"
-                style={{
-                  fontSize: "25px",
-                  position: "relative",
-                  top: "2px",
-                }}
-              ></i>
+              <i className="pi pi-angle-right" style={{ marginRight: "5px" }}></i>
               <button
-                className={`anime-item ${selectedCategory === "naruto" ? "selected" : ""}`}
-                onClick={() => handleCategoryChange("naruto")}
+                className={`anime-item ${subCategory === "Naruto" ? "selected" : ""}`}
+                onClick={() => handleCategoryChange("Naruto")}
               >
                 Naruto
               </button>
-              <br />
-              <i
-                className="pi pi-angle-right"
-                style={{
-                  fontSize: "25px",
-                  position: "relative",
-                  top: "2px",
-                }}
-              ></i>
+            </li>
+            <li>
+              <i className="pi pi-angle-right" style={{ marginRight: "5px" }}></i>
               <button
-                className={`anime-item ${selectedCategory === "onepiece" ? "selected" : ""}`}
-                onClick={() => handleCategoryChange("onepiece")}
+                className={`anime-item ${subCategory === "One Piece" ? "selected" : ""}`}
+                onClick={() => handleCategoryChange("One Piece")}
               >
                 One Piece
               </button>
-              <br />
-              <i
-                className="pi pi-angle-right"
-                style={{
-                  fontSize: "25px",
-                  position: "relative",
-                  top: "2px",
-                }}
-              ></i>
+            </li>
+            <li>
+              <i className="pi pi-angle-right" style={{ marginRight: "5px" }}></i>
               <button
-                className={`anime-item ${selectedCategory === "hxh" ? "selected" : ""}`}
-                onClick={() => handleCategoryChange("hxh")}
+                className={`anime-item ${subCategory === "Hunter X Hunter" ? "selected" : ""}`}
+                onClick={() => handleCategoryChange("Hunter X Hunter")}
               >
-                Hanter X Hanter
+                Hunter X Hunter
               </button>
-
-              <br />
-              <i
-                className="pi pi-angle-right"
-                style={{
-                  fontSize: "25px",
-                  position: "relative",
-                  top: "2px",
-                }}
-              ></i>
+            </li>
+            <li>
+              <i className="pi pi-angle-right" style={{ marginRight: "5px" }}></i>
               <button
-                className={`anime-item ${selectedCategory === "kimetsu" ? "selected" : ""}`}
-                onClick={() => handleCategoryChange("kimetsu")}
+                className={`anime-item ${subCategory === "Kimetsu" ? "selected" : ""}`}
+                onClick={() => handleCategoryChange("Kimetsu")}
               >
                 Kimetsu
               </button>
             </li>
+
+            <li>
+              <i className="pi pi-angle-right" style={{ marginRight: "5px" }}></i>
+              <button
+                className={`anime-item ${subCategory === "Attack On Titan" ? "selected" : ""}`}
+                onClick={() => handleCategoryChange("Attack On Titan")}
+              >
+                Attack On Titan
+              </button>
+            </li>
+            <li>
+              <i className="pi pi-angle-right" style={{ marginRight: "5px" }}></i>
+              <button
+                className={`anime-item ${subCategory === "Death Note" ? "selected" : ""}`}
+                onClick={() => handleCategoryChange("Death Note")}
+              >
+                Death Note
+              </button>
+            </li>
+            <li>
+              <i className="pi pi-angle-right" style={{ marginRight: "5px" }}></i>
+              <button
+                className={`anime-item ${subCategory === "Jujutsu Kaisen" ? "selected" : ""}`}
+                onClick={() => handleCategoryChange("Jujutsu Kaisen")}
+              >
+                Jujutsu Kaisen
+              </button>
+            </li>
+            <li>
+              <i className="pi pi-angle-right" style={{ marginRight: "5px" }}></i>
+              <button
+                className={`anime-item ${subCategory === "Detective Conan" ? "selected" : ""}`}
+                onClick={() => handleCategoryChange("Detective Conan")}
+              >
+                Detective Conan
+              </button>
+            </li>
+            <li>
+              <i className="pi pi-angle-right" style={{ marginRight: "5px" }}></i>
+              <button
+                className={`anime-item ${subCategory === "Berserk" ? "selected" : ""}`}
+                onClick={() => handleCategoryChange("Berserk")}
+              >
+                Berserk
+              </button>
+            </li>
+            <li>
+              <i className="pi pi-angle-right" style={{ marginRight: "5px" }}></i>
+              <button
+                className={`anime-item ${subCategory === "Vinland Saga" ? "selected" : ""}`}
+                onClick={() => handleCategoryChange("Vinland Saga")}
+              >
+                Vinland Saga
+              </button>
+            </li>
           </ul>
-        </Offcanvas.Body>
-      </Offcanvas>
-    </div>
+        )}
+        {subCategory === "art" && (
+          <ul>
+        
+            <li>
+              <i className="pi pi-angle-right" style={{ marginRight: "5px" }}></i>
+              <button
+                className={`anime-item ${subCategory === "Art Numérique" ? "selected" : ""}`}
+                onClick={() => handleCategoryChange("Art Numérique")}
+              >
+                Art numérique
+              </button>
+            </li>
+            <li>
+              <i className="pi pi-angle-right" style={{ marginRight: "5px" }}></i>
+              <button
+                className={`anime-item ${subCategory === "Van Gogh" ? "selected" : ""}`}
+                onClick={() => handleCategoryChange("Van Gogh")}
+              >
+                Van Gogh
+              </button>
+            </li>
+
+            <li>
+              <i className="pi pi-angle-right" style={{ marginRight: "5px" }}></i>
+              <button
+                className={`anime-item ${subCategory === " Monalisa" ? "selected" : ""}`}
+                onClick={() => handleCategoryChange("Monalisa ")}
+              >
+                Monalisa
+              </button>
+            </li>
+          
+          </ul>
+        )}
+
+{subCategory === "Cartoon" && (
+          <ul>
+        
+            <li>
+              <i className="pi pi-angle-right" style={{ marginRight: "5px" }}></i>
+              <button
+                className={`anime-item ${subCategory === "SpongeBob" ? "selected" : ""}`}
+                onClick={() => handleCategoryChange("SpongeBob")}
+              >
+                SpongeBob
+              </button>
+            </li>
+            <li>
+              <i className="pi pi-angle-right" style={{ marginRight: "5px" }}></i>
+              <button
+                className={`anime-item ${subCategory === "Van Gogh" ? "selected" : ""}`}
+                onClick={() => handleCategoryChange("Van Gogh")}
+              >
+                Van Gogh
+              </button>
+            </li>
+
+            <li>
+              <i className="pi pi-angle-right" style={{ marginRight: "5px" }}></i>
+              <button
+                className={`anime-item ${subCategory === " Monalisa" ? "selected" : ""}`}
+                onClick={() => handleCategoryChange("Monalisa ")}
+              >
+                Monalisa
+              </button>
+            </li>
+          
+          </ul>
+        )}
+      </Offcanvas.Body>
+    </Offcanvas>
+  </div>
   );
 };
 

@@ -8,6 +8,8 @@ import Carousel from "react-bootstrap/Carousel";
 import Skeleton from '@mui/material/Skeleton';  // If you are using Material UI
 
 const ProductPage = () => {
+  const  prix=0.6;
+  const  oldprixe=1;
   const location = useLocation();
   const { image, title, price, originalPrice } = location.state || {};
   const [isAddingToCartId, setIsAddingToCartId] = useState(null);
@@ -83,10 +85,6 @@ const ProductPage = () => {
 
   const [selectedSize, setSelectedSize] = useState("6 cm"); // الحالة لحجم المنتج المختار
 
-const handleSizeSelect = (size) => {
-  setSelectedSize(size); // تحديث الحالة محلياً
-  localStorage.setItem("selectedSize", size); // تخزين الحجم في Local Storage
-};
 
 
   useEffect(() => {
@@ -172,7 +170,84 @@ const addToCart = (sticker) => {
     return (
       <div> 
         
-        
+        <Navbar />
+        <Offcanva  />
+        <div className="product-page">
+  <div className="bloc_img_product">
+    <div className="product-image-container">
+    <Skeleton sx={{width:"90%",height:"1200px",position:"relative",top:"-200px"}} />
+
+    </div>
+  </div>
+  <div className="product-details">
+  <Skeleton sx={{width:"90%",height:"60px"}} />
+
+  <p className="price">{prix} DT</p>
+  <p className="discount-price">{oldprixe} DT</p>
+  {/* <div className='bloc_size'> 
+          <p style={{fontSize:"15px", fontWeight:"700"}}>Size :</p>
+          <button 
+            className='button_size' 
+            onClick={() => handleSizeSelect("6 cm")} 
+            style={{ backgroundColor: selectedSize === "6 cm" ? "#ccc" : "" }}
+          >
+            6 cm
+          </button>
+          <button 
+            className='button_size' 
+            onClick={() => handleSizeSelect("8 cm")} 
+            style={{ backgroundColor: selectedSize === "8 cm" ? "#ccc" : "" }}
+          >
+            8 cm
+          </button>
+          <button 
+            className='button_size' 
+            onClick={() => handleSizeSelect("10 cm")} 
+            style={{ backgroundColor: selectedSize === "10 cm" ? "#ccc" : "" }}
+          >
+            10 cm
+          </button>
+          <button 
+            className='button_size' 
+            onClick={() => handleSizeSelect("12 cm")} 
+            style={{ backgroundColor: selectedSize === "12 cm" ? "#ccc" : "" }}
+          >
+            12 cm
+          </button>
+        </div><br /> */}
+  <button
+    className="add-to-cart"
+   
+    
+  >
+           <span> Ajouter au panier <i className="pi pi-shopping-cart" style={{ color: "", marginLeft:"10px"}}></i> </span> 
+  </button>
+
+  <div className="product-characteristics">
+    <h2 style={{fontWeight:"800"}}>Caractéristiques du produit</h2>
+    {/* <div className="rating">
+      ★★★★★ <span>4.66 (1828 avis)</span>
+    </div> */}
+      <br />
+    <div className="rating">
+    ❤️ أطلق العنان لإبداعك وزيّن حاجاتك بستيكيرات فينيل مزيانة برشا
+
+
+    </div>
+    <br />
+    <ul>
+      <li>تصاميم شيك ومميزة باش تعطي لمسة شخصية لحاسوبك ،قرورات الماء، التليفونات، موتورات ،حتى بيتك</li>
+      <li>سهلة في اللصق والتقليع، لصق وزين منغير تعب</li>
+      <li>جودة عالية برشا، تقاوم الماء والخدوش، وتعيش معاك مدة طويلة.</li>
+      <li>يعطي شكل راقي وجديد لحاجاتك.</li>
+      <li>مصنوعة باحسن نوعية للناس الي تحب التفاصيل الفريدة</li>
+    </ul>
+  </div>
+</div>
+
+
+
+</div>
          </div>
     );
   }
@@ -228,7 +303,7 @@ const addToCart = (sticker) => {
       </div>
 
       <Navbar />
-      <Offcanva setSelectedCategory={handleCategoryChange} />
+      {/* <Offcanva setSelectedCategory={handleCategoryChange} /> */}
 
       <div className="product-page">
   <div className="bloc_img_product">
@@ -237,10 +312,10 @@ const addToCart = (sticker) => {
     </div>
   </div>
   <div className="product-details">
-  <h1>{title}</h1>
-  <p className="price">{price} DT</p>
+  <h1 style={{fontWeight:'800'}}>{title}</h1>
+  <p className="price">{prix} DT</p>
   <p className="discount-price">{originalPrice} DT</p>
-  <div className='bloc_size'> 
+  {/* <div className='bloc_size'> 
           <p style={{fontSize:"15px", fontWeight:"700"}}>Size :</p>
           <button 
             className='button_size' 
@@ -270,7 +345,7 @@ const addToCart = (sticker) => {
           >
             12 cm
           </button>
-        </div><br />
+        </div><br /> */}
   <button
     className="add-to-cart"
     onClick={() => addToCart({ 
@@ -300,18 +375,23 @@ const addToCart = (sticker) => {
   </button>
 
   <div className="product-characteristics">
-    <h2>Caractéristiques du produit</h2>
-    <div className="rating">
+    <h2 style={{fontWeight:"800"}}>Caractéristiques du produit</h2>
+    {/* <div className="rating">
       ★★★★★ <span>4.66 (1828 avis)</span>
+    </div> */}
+      <br />
+    <div className="rating">
+    ❤️ أطلق العنان لإبداعك وزيّن حاجاتك بستيكيرات فينيل مزيانة برشا
+
+
     </div>
+    <br />
     <ul>
-      <li>Décorez et personnalisez des ordinateurs portables, des bouteilles d'eau et plus encore</li>
-      <li>Sticker en vinyle demi-découpé (kiss-cut), facile à décoller.</li>
-      <li>Ultra résistant, y compris à l'eau.</li>
-      <li>Une bordure blanche de 3,2 mm entoure chaque design.</li>
-      <li>Fini mat.</li>
-      <li>Notez que si vous commandez plusieurs stickers, ils seront imprimés par deux sur une même planche pour limiter le gaspillage.</li>
-      <li>Comme chaque article est fabriqué spécialement pour vous par votre fournisseur tiers local, il peut y avoir de légères différences dans le produit reçu.</li>
+      <li>تصاميم شيك ومميزة باش تعطي لمسة شخصية لحاسوبك ،قرورات الماء، التليفونات، موتورات ،حتى بيتك</li>
+      <li>سهلة في اللصق والتقليع، لصق وزين منغير تعب</li>
+      <li>جودة عالية برشا، تقاوم الماء والخدوش، وتعيش معاك مدة طويلة.</li>
+      <li>يعطي شكل راقي وجديد لحاجاتك.</li>
+      <li>مصنوعة باحسن نوعية للناس الي تحب التفاصيل الفريدة</li>
     </ul>
   </div>
 </div>
@@ -352,7 +432,7 @@ const addToCart = (sticker) => {
                                 {sticker.originalPrice} DT
                               </span>
                               <span className="discounted-price">
-                                {sticker.price} DT
+                                {prix} DT
                               </span>
                               <button
     style={{

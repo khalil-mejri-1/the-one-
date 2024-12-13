@@ -489,7 +489,11 @@ useEffect(() => {
   <h3 className="paragraphe_cart">{item.title}</h3>
   <div className="bloc_size">
     <p style={{ fontSize: "15px", fontWeight: "700" }}>Size :</p>
-    
+   
+   
+
+
+
     <button 
       className="button_size" 
       onClick={() => handleSizeSelect(item._id, "6 cm")}

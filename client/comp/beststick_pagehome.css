@@ -12,7 +12,7 @@ top: 20px;
   z-index: 0;
     font-weight: 700;
     font-size: x-large;
-    width: 330px;
+    width: 400px;
     border-bottom: 3px solid #FF416C; /* يمكنك تعديل السمك واللون كما تريد */
     left: -2px;
     padding-bottom:10px; /* لتوفير مسافة بين النص والخط */
@@ -27,15 +27,14 @@ top: 20px;
 
    display: flex;
     gap: 10px;
-  border: transparent solid;
+  border: transparent    solid;
     cursor: pointer;
     display: grid;
 
-    grid-template-columns: repeat(auto-fill, minmax(200px, 2fr));
+    grid-template-columns: repeat(auto-fill, minmax(230px, 2fr));
     gap: 10px; /* المسافة بين العناصر */
    
         margin: auto;
-      
   
 }
 

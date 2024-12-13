@@ -86,7 +86,7 @@ height: 100%;
 }
 .search-container::before {
   content: "";
-  z-index: 51;
+ 
   position: absolute;
   top: -2px;
   left: -2px;
@@ -129,6 +129,22 @@ height: 100%;
     background-position: 0% 50%;
   }
 }
+.bloc_resulta_recherche{
+  z-index: -2;
+
+  position: absolute;
+  top: 30px;
+  left: 0;
+  height: 500px;
+  width: 100%;
+  background: rgb(243, 238, 238);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  }
 
 .search-input {
   flex-grow: 1;
@@ -138,12 +154,16 @@ width: 80%;
 margin-top: 0px;
 
 position: absolute;
-
+margin-left: 10px;
   background-color: transparent;
   padding: 6px;
   color: rgb(0, 0, 0);
   font-weight: 500;
   font-size: 1rem;
+}
+.search-input ::placeholder{
+  font-weight: 900;
+
 }
 
 .titre_res{
@@ -153,7 +173,9 @@ position: absolute;
   border: transparent solid;
 
 }
-
+.resultarech{
+  margin-top: 20px;
+}
 
 .search-button {
   background-color: transparent;
@@ -232,14 +254,16 @@ font-size: xlarge;
 }
 .resulta_rech{
  color: black;
-margin: 5px ;
-  font-weight:500; 
+margin: 15px ;
+  font-weight:700; 
   border: transparent solid;
   position: relative;
   left: -40px;
   padding-left: 30px;
   padding-right: 6px;
   padding-top: 6px;
+          cursor:pointer;
+font-size: 18px;
   border-radius: 50px;
   padding-bottom: 6px;
 
@@ -252,7 +276,14 @@ margin: 5px ;
 
  }
  
-
+.bloc_touche{
+  border: transparent solid;
+  height: 50px;
+  position: fixed;
+  background-color: hsl(336, 80%, 52%);
+  z-index: 700;
+  width: 100%;
+}
 
 .p-button-warning{
   width: 100.2%;
@@ -384,33 +415,21 @@ z-index: 100;
   /* للتأكد من ظهور العنصر فوق المحتوى الآخر */
 }
 
-.icon_serche {
-  position: relative;
-  /* تأكد من أن القيم هي خصائص CSS صحيحة */
-  font-size:17px;
-  /* استخدم "-" بدلًا من " " للفصل بين الكلمات */
-  color: #000000;
-  /* إزالة علامات الاقتباس حول القيم */
-  display: block;
-  /* استخدام "-" للفصل بين الكلمات */
- top: 1px;
 
-  z-index: 100;
-  /* استخدام "-" للفصل بين الكلمات */
-  text-align: center;
-  left: 15px;
-  /* تأكد من كتابة القيمة بشكل صحيح */
-  /* استخدام "-" للفصل بين الكلمات */
-  transition: 0.2s;
-}
 .pi-search{
   position: relative;
   top: 1px;
+  color: gray;
+  cursor:pointer;
+
   right: 10px;
 }
 .sershfooter{
   position: relative;
   top: -10px;
+  float: left;
+  left: 20px;
+  color: #000000;
 }
 
 .pi-home{
@@ -430,7 +449,8 @@ z-index: 100;
   /* تأكد من كتابة القيمة بشكل صحيح */
   /* استخدام "-" للفصل بين الكلمات */
   transition: 0.2s;
-  margin-left: 29%;
+  margin: auto;
+  margin-right: 15px;
   text-decoration: none;
   
 }
@@ -555,24 +575,19 @@ position: relative;
 z-index: 0;
 
 top:95px;
-background-color: #e3f8e9;
-
+background-color: #dcfae4;
 border:  transparent solid;
 }
 .pargremiz{
-border: transparent solid 1px;
+border: transparent solid 0px;
 position: relative;
 color: #eb053b;
-font-weight: 500;
+font-weight: 700;
+font-size: 20px ;
 left: 0px;
 top: 5px;
 display: flex;
  justify-content: center; 
  align-items: center;
   
-}
-@media (max-width: 384px) {
-  .pargremiz{
-height: 50px;
-  }
 }

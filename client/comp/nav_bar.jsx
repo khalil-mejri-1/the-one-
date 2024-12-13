@@ -2,14 +2,8 @@ import './navbar.css';
 import { useState, useEffect, useRef } from 'react';
 import * as React from 'react';
 
-import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import { useTheme } from '@mui/material/styles';
 
 import "primereact/resources/themes/lara-light-cyan/theme.css";
 
@@ -21,15 +15,27 @@ import ButtonGroup from "./button.jsx";
 
 const Navbar = ({ cartItems = [] }) => {
   const [searchVisible, setSearchVisible] = useState(false); // Toggle search bar visibility
-  const searchRef = useRef(null); // Ref for the search container
   const [windowWidth, setWindowWidth] = useState(window.innerWidth); // Track window width
-  const list = ["naruto", "onepiece", "hxh", "Car"];
+
+
+
+  const list = [
+    "Naruto",
+    "One Piece",
+    "Hunter X Hunter",
+    "Kimetsu",
+    "Attack On Titan",
+    "Death Note",
+    "Jujutsu Kaisen",
+    "Detective Conan",
+    "Berserk",
+    "Vinland Saga",
+  ];
+  
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredItems, setFilteredItems] = useState([]);
 
   const [open, setOpen] = React.useState(false);
-  const theme = useTheme();
-  const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
 
 
 
@@ -84,9 +90,7 @@ const Navbar = ({ cartItems = [] }) => {
     };
   }, []);
 
-  const toggleSearch = () => {
-    setSearchVisible(prev => !prev); // Toggle between true/false
-  }
+
 
   
   useEffect(() => {
@@ -109,11 +113,21 @@ const Navbar = ({ cartItems = [] }) => {
 
 
   const phrases = [
-    "  Naruto",
-     "  One Piece",
-    "  Hunter X Hunter",
-    "  Car",
+   
+   " Naruto",
+"One Piece",
+"Hunter X Hunter",
+"Kimetsu",
+"attack on titan",
+"Death Note",
+"Jujutsu Kaisen",
+"Detective Conan",
+"Berserk",
+"Vinland Saga",
   ];
+
+
+  
 
   // حالة لتخزين الـ placeholder الحالي
   const [placeholder, setPlaceholder] = useState(phrases[0]);
@@ -133,8 +147,35 @@ const Navbar = ({ cartItems = [] }) => {
 
 
 
+  const [isOpen, setIsOpen] = useState(false); // حالة تتبع فتح أو إغلاق المربع
+  const boxRef = useRef(null); // مرجع لتحديد المربع
+
+  // وظيفة لإظهار المربع عند النقر على الزر
+  const handleButtonClick = () => {
+    setIsOpen(!isOpen);
+  };
+
+  // وظيفة لإخفاء المربع عند النقر خارجه
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (boxRef.current && !boxRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+
+
   return (
     <>
+    {/* <div className='bloc_touche'>
+      aa
+    </div> */}
       <div className='bloc_complait_nav'>
         <div className="bloc_navbar">
           
@@ -148,14 +189,7 @@ const Navbar = ({ cartItems = [] }) => {
           </div>
 
           <div className="bloc_sersh_visible">
-          <div className="card">
-           
-
-           
         
-
-            
-        </div>
         
         <React.Fragment>
      
@@ -208,35 +242,41 @@ const Navbar = ({ cartItems = [] }) => {
   
   <div className="search-popup" style={{ border: "transparent solid" }}>
 
-    <p className='titre_res'>
-      Résulta de recherche de " {searchTerm.trim() === "" ? "..." : searchTerm} "
-    </p>
+   
     <ul>
-  {/* عرض العناصر المفلترة */}
-  {filteredItems.length > 0 ? (
-    filteredItems.map((item, index) => (
-      <li key={index} className='resulta_rech' onClick={() => handleItemClick(item)}>
-        <i className="pi pi-search" style={{ fontSize: '1rem' }}></i> {item}
-      </li>
-    ))
-  ) : (
-    // في حال عدم وجود أي فئة مطابقة وكان searchTerm غير فارغ، نعرض الرسالة
-    searchTerm && (
-      <p style={{
-        color: 'black',
-        fontSize: '16px',
-        fontWeight: '500',
-        marginTop: "-2px",
-        border: "black solid 0px",
-        maxWidth: "90%",
-        wordWrap: "break-word", // Ensure long words break to the next line
-        whiteSpace: "normal" // Allow text to wrap normally
-      }}>
-        Aucune catégorie trouvée avec le nom "{searchTerm}"
-      </p>
-    )
-  )}
-</ul>
+      {/* عرض العناصر */}
+      {filteredItems.length > 0 || !searchTerm ? (
+        (searchTerm ? filteredItems : list).map((item, index) => (
+          <li
+            key={index}
+            className="resulta_rech"
+            onClick={() => handleItemClick(item)}
+            style={{
+              padding: "5px 20px",
+              cursor: "pointer",
+            }}
+          >
+            <i className="pi pi-search" style={{ fontSize: "1rem" }}></i> {item}
+          </li>
+        ))
+      ) : (
+        // في حال عدم وجود أي فئة مطابقة وكان searchTerm غير فارغ، نعرض الرسالة
+        <p
+          style={{
+            color: "black",
+            fontSize: "19px",
+            fontWeight: "400",
+            marginTop: "40px",
+            cursor: "pointer",
+            maxWidth: "90%",
+            wordWrap: "break-word", // Ensure long words break to the next line
+            whiteSpace: "normal", // Allow text to wrap normally
+          }}
+        >
+          Aucune catégorie trouvée avec le nom "{searchTerm}"
+        </p>
+      )}
+    </ul>
 
   </div>
 </div>
@@ -247,20 +287,83 @@ const Navbar = ({ cartItems = [] }) => {
       </Dialog>
         </React.Fragment>
         
-            <div className="search-container">
+          
 
-              <input
-              onClick={handleClickOpen}
-                type="text"
-              style={{position:"relative",top:"-0px",color:"black ",fontWeight:"0"}}
-              className="search-input"
-              placeholder={placeholder}
-              />
-              <button className="search-button" >
-                <i className="pi pi-search icon_serche_nav-bar"></i>
-              </button>
-              
-            </div>
+
+
+
+    <div className="search-container" style={{ position: "relative" }}>
+      <input
+        type="text"
+        style={{
+          position: "relative",
+          top: "-0px",
+          color: "black",
+          fontWeight: "600",
+          fontFamily: "Poppins",
+        }}
+        className="search-input"
+        placeholder={placeholder}
+           value={searchTerm}
+      onChange={handleSearch}
+        onClick={handleButtonClick}
+      />
+      <button className="search-button" >
+        <i className="pi pi-search icon_serche_nav-bar"></i>
+      </button>
+
+      {/* المربع الذي يحتوي على الفئات */}
+      {isOpen && (
+  <div
+    ref={boxRef}
+    className="bloc_resulta_recherche"
+    style={{
+      maxHeight: "400px", // أقصى ارتفاع للصندوق
+      overflowY: "auto", // شريط التمرير عند الحاجة
+      border: "1px solid #ccc", // إطار لجعل الصندوق أكثر وضوحًا (اختياري)
+      padding: "10px", // مسافة داخلية للصندوق
+      backgroundColor: "#fff", // خلفية بيضاء لتوضيح العناصر (اختياري)
+    }}
+  >
+    <ul>
+      {/* عرض العناصر */}
+      {filteredItems.length > 0 || !searchTerm ? (
+        (searchTerm ? filteredItems : list).map((item, index) => (
+          <li
+            key={index}
+            className="resulta_rech"
+            onClick={() => handleItemClick(item)}
+            style={{
+              padding: "5px 20px",
+              cursor: "pointer",
+            }}
+          >
+            <i className="pi pi-search" style={{ fontSize: "1rem" }}></i> {item}
+          </li>
+        ))
+      ) : (
+        // في حال عدم وجود أي فئة مطابقة وكان searchTerm غير فارغ، نعرض الرسالة
+        <p
+          style={{
+            color: "black",
+            fontSize: "19px",
+            fontWeight: "400",
+            marginTop: "40px",
+            cursor: "pointer",
+            maxWidth: "90%",
+            wordWrap: "break-word", // Ensure long words break to the next line
+            whiteSpace: "normal", // Allow text to wrap normally
+          }}
+        >
+          Aucune catégorie trouvée avec le nom "{searchTerm}"
+        </p>
+      )}
+    </ul>
+  </div>
+)}
+
+
+    </div>
 
 
           </div>
@@ -294,15 +397,15 @@ const Navbar = ({ cartItems = [] }) => {
                 </span>
               )}
             </div>
+            
           </div>
 
           
         </div>
       </div>
 
-      {/* Promo banner */}
       <div className='blocremiz'>
-        <p className='pargremiz'>Livraison gratuite sur les achats de 50 dinars ou plus</p>
+        <p className='pargremiz'>ملحوضة مهمة : تنجم اتجرب المنتوج لمدة 3 ايام وكان معجبكش ولا تقشر ولا التصويرة تفسخت انرجعولك فلوسك      </p>
       </div>
       <br /> <br /> <br /> <br />
   

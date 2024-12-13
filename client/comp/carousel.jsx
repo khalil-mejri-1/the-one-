@@ -26,6 +26,7 @@ function Caroussel() {
         {/* العنصر الأول */}
        
       <Carousel.Item >
+  
         <video
         src={demon}
         autoPlay
@@ -33,12 +34,12 @@ function Caroussel() {
       muted
         style={{ width: '100%' }}
       >
-        Your browser does not support the video tag.
+ 
       </video>
-    
+ 
          <div className="overlay">
-      <button className="button_next" onClick={() => handleItemClick("kimetsu")}>
-        Demon Slayer <img className="next" src={next} alt="Next" />
+      <button className="button_next" onClick={() => handleItemClick("Kimetsu")}>
+      Kimetsu<img className="next" src={next} alt="Next" />
       </button>
     </div>
         </Carousel.Item>
@@ -55,7 +56,7 @@ function Caroussel() {
       </video>
     
          <div className="overlay">
-      <button className="button_next" onClick={() => handleItemClick("naruto")}>
+      <button className="button_next" onClick={() => handleItemClick("Naruto")}>
        Naruto <img className="next" src={next} alt="Next"  />
       </button>
     </div>
@@ -73,7 +74,7 @@ function Caroussel() {
       </video>
     
          <div className="overlay">
-      <button className="button_next" onClick={() => handleItemClick("attack")}>
+      <button className="button_next" onClick={() => handleItemClick("Attack On Titan")}>
        Attack On Titan <img className="next" src={next} alt="Next" />
       </button>
     </div>

@@ -1,116 +1,116 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";  // Added useLocation
 import Carousel from "react-bootstrap/Carousel";
-import Card from "react-bootstrap/Card";
 import "bootstrap/dist/css/bootstrap.min.css";
-import beststickres from "../api/bestcategory/beststickres.json";
 import "./beststick_pagehome.css";
 import "./carousel.css";
-const BestStickPageHome = () => {  // Corrected the component name
+import axios from 'axios';
+import Card from "react-bootstrap/Card";
+
+const BestStickPageHome = () => {  
   const [cartItems, setCartItems] = useState([]);
   const [loadingStickerId, setLoadingStickerId] = useState(null);
   const [showMessage, setShowMessage] = useState(false);
   const [messageContent, setMessageContent] = useState("");
-  const [itemsPerPage, setItemsPerPage] = useState(0);
-  const [shuffledStickers, setShuffledStickers] = useState([]);
-
+  const [isAddingToCartId, setIsAddingToCartId] = useState(null);
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();  // UseLocation to access the current location
   
-  const [selectedCategory, setSelectedCategory] = useState(
-    sessionStorage.getItem("selectedCategory") || location.state?.selectedCategory || "naruto"
-  );
+  const [selectedCategory, setSelectedCategory] = useState(""); // Initialize selectedCategory
 
-  // Function to chunk the array into pages
-  const chunk = (array, size) => {
-    return array.reduce((acc, _, index) => {
-      if (index % size === 0) acc.push(array.slice(index, index + size));
-      return acc;
-    }, []);
-  };
 
-  // Shuffle the array to display products randomly
-  const shuffleArray = (array) => {
-    return array.sort(() => Math.random() - 0.5);
-  };
-
-  // Update the number of items per page based on screen size
   useEffect(() => {
-    const updateItemsPerPage = () => {
-      const screenWidth = window.innerWidth;
-      if (screenWidth <= 600) {
-        setItemsPerPage(4);
-      } else if (screenWidth <= 900) {
-        setItemsPerPage(6);
-      } else if (screenWidth <= 1308) {
-        setItemsPerPage(12);
-      } else {
-        setItemsPerPage(14);
+    // Example: If you pass the category via URL or another source
+    const categoryFromUrl = new URLSearchParams(location.search).get("category");
+    setSelectedCategory(categoryFromUrl || 'beststckres'); // Use default if not found
+  }, [location]);
+  
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get('https://the-one-opal.vercel.app/beststckres');
+
+        // Ensure the response is valid JSON
+        if (response.status === 200) {
+          // Check if the response data is a valid array or object
+          if (Array.isArray(response.data)) {
+            setProducts(response.data);
+          } else {
+            setError('Invalid product data format.');
+          }
+        } else {
+          setError('Failed to fetch products: ' + response.statusText);
+        }
+      } catch (err) {
+        // Log the error and provide feedback to the user
+        console.error('Error fetching products:', err);
+        setError('Failed to fetch products.');
+      } finally {
+        setLoading(false);
       }
     };
 
-    updateItemsPerPage();
-    window.addEventListener("resize", updateItemsPerPage);
-
-    return () => {
-      window.removeEventListener("resize", updateItemsPerPage);
-    };
+    fetchProducts();
   }, []);
 
-  // Shuffle the stickers when the component is loaded
-  useEffect(() => {
-    setShuffledStickers(shuffleArray([...beststickres]));
-  }, []);
+  if (loading) {
+    return <div>Loading...</div>; // Display a loading state
+  }
 
-  // Group stickers for pagination
-  const groupedStickers = chunk(shuffledStickers, itemsPerPage);
-
+  // Add to Cart Function
   const addToCart = (sticker) => {
-    setLoadingStickerId(sticker.id); // تعيين الحالة للعنصر الذي يتم التعامل معه
-  
-    // التأكد من إضافة الفئة إذا كانت موجودة
+    setIsAddingToCartId(sticker._id);
+
     const productWithCategory = {
-      ...sticker,  // نسخ جميع الخصائص الموجودة في sticker
-      category: sticker.category || selectedCategory // إضافة الفئة (إما من المنتج أو من الفئة المحددة)
+      ...sticker,
+      category: sticker.category || selectedCategory,
     };
-  
-    const isAlreadyInCart = cartItems.some((item) => item.id === productWithCategory.id);
-  
-    if (isAlreadyInCart) {
+
+    if (cartItems.some((item) => item._id === sticker._id)) {
       setMessageContent("Le sticker est déjà dans le panier.");
     } else {
       const updatedCart = [...cartItems, productWithCategory];
       setCartItems(updatedCart);
-      localStorage.setItem("cartItems", JSON.stringify(updatedCart));
+      localStorage.setItem('cartItems', JSON.stringify(updatedCart));
       setMessageContent("Le sticker a été ajouté au panier.");
     }
-  
+
     setShowMessage(true);
-  
+
     setTimeout(() => {
       setShowMessage(false);
       setMessageContent("");
-      setLoadingStickerId(null); // إعادة تعيين الحالة بعد ثانية
-    }, 400);
+      setIsAddingToCartId(null);
+    }, 900);
   };
   
   // Navigate to the product page
   const openProductPage = (sticker) => {
-    navigate(`/product/${selectedCategory}/${sticker.id}`, { state: { ...sticker } });
+    console.log('Selected Category:', selectedCategory);  // Check the category
+    console.log('Sticker:', sticker);  // Check the sticker object
+  
+    if (!selectedCategory || !sticker._id) {
+      console.error('Selected category or sticker ID is missing.');
+      return; // Prevent navigation if data is invalid
+    }
+  
+    // تنقل إلى صفحة المنتج مع إضافة بيانات المنتج في الـ state
+    navigate(`/product/${selectedCategory}/${sticker._id}`, { state: { ...sticker } });
+  
+    // Scroll to the top of the page
+    window.scrollTo(0, 0);  // Scroll to the top (0,0) is the correct value)
   };
-
+  
+  
   // Open the cart page
   const openCartPage = () => {
     navigate("/cart", { state: { cartItems } });
   };
 
-  // Load cart items from localStorage
-  useEffect(() => {
-    const savedCartItems = localStorage.getItem("cartItems");
-    if (savedCartItems) {
-      setCartItems(JSON.parse(savedCartItems));
-    }
-  }, []);
 
   return (
     <>
@@ -145,90 +145,68 @@ const BestStickPageHome = () => {  // Corrected the component name
         </div>
       </div>
 
-     
-
-  
-
       <h3 className="titrebeststick" style={{marginLeft:"30px"}}>Les stickers les plus vendus</h3>
-      <br />
+      <br /> <br />
       <Carousel data-bs-theme="dark" interval={null}>
+        <div>
+          <br />          <br />
+          <br />
+          <br />
 
-        {groupedStickers.map((group, groupIndex) => (
-          <Carousel.Item key={groupIndex}>
+          <div className="product-grid">
+            {products.map((product) => (
+              <div key={product._id} className="product-card_pagehome">
+             
+                <Card className="product-card" onClick={() => openProductPage(product)}>
+                 
+                  <div className="img-container">
+                    <Card.Img
+                      className="img_stckres"
+                      src={product.image || '/path/to/fallback-image.jpg'}
+                      alt={product.title}
+                      onError={(e) => e.target.src = '/path/to/fallback-image.jpg'}
+                    />
+                  </div>
+                  <Card.Body>
+                    <p className="truncate">{product.title}</p>
+                    <Card.Text className="product-price">
+                      <span className="original-price">{product.originalPrice} DT</span>
+                      <span className="discounted-price">
+                        {product.originalPrice * (1 - product.discount / 100)} DT
+                      </span>
+                    </Card.Text>
 
-            <div className="blocbeststick">
-              
-              <div className="stickres_bloc_page_home">
-                <div className="product-grid_page_home">
-                  {group.map((sticker) => (
-                    <div
-                      key={sticker.id}
-                      className="product-card_pagehome"
-                      onClick={() => openProductPage(sticker)}
+                    <button
+                      style={{
+                        backgroundColor: "transparent",
+                        border: "transparent",
+                        position: "relative",
+                        top: "35px",
+                        float: "right",
+                        right: "-20px",
+                      }}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        if (isAddingToCartId !== product._id) {
+                          addToCart(product);
+                        }
+                      }}
+                      disabled={isAddingToCartId === product._id}
                     >
-                      <Card className="product-card">
-                        <div className="img-container">
-                          <Card.Img
-                            className="img_stckres"
-                            src={sticker.image}
-                            alt={sticker.title}
-                          />
-                        </div>
-                        <Card.Body>
-                          <p className="truncate">{sticker.title}</p>
-                          <Card.Text className="product-price">
-                            <span className="original-price">
-                              {sticker.originalPrice} DT
-                            </span>
-                            <span className="discounted-price">
-                              {sticker.price} DT
-                            </span>
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            <button
-    style={{
-      backgroundColor: "transparent",
-      border: "transparent",
-      position: "relative",
-      top: "50px",
-    }}
-    onClick={(e) => {
-      e.stopPropagation();
-      if (loadingStickerId !== sticker.id) {
-        addToCart(sticker);
-      }
-    }}
-    disabled={loadingStickerId === sticker.id} // تعطيل الزر أثناء التحميل
-  >
-    {loadingStickerId === sticker.id ? (
-      <i className="pi pi-spin pi-spinner iconcard"></i> // أيقونة الانتظار أثناء إضافة العنصر
-    ) : cartItems.some((item) => item.id === sticker.id) ? (
-      <i className="pi pi-check-circle iconcard" style={{ color: "#f7184c" }}></i> // أيقونة check-circle إذا كان العنصر في السلة
-    ) : (
-      <i className="pi pi-shopping-cart iconcard"></i> // أيقونة السلة إذا لم يكن العنصر في السلة
-    )}
-  </button>
-                          </Card.Text>
-                        </Card.Body>
-                      </Card>
-                    </div>
-                  ))}
-                </div>
+                      {isAddingToCartId === product._id ? (
+                        <i className="pi pi-spin pi-spinner iconcard"></i>
+                      ) : cartItems.some((item) => item._id === product._id) ? (
+                        <i className="pi pi-check-circle iconcard" style={{ color: "#f7184c" }}></i>
+                      ) : (
+                        <i className="pi pi-shopping-cart iconcard"></i>
+                      )}
+                    </button>
+                  </Card.Body>
+                </Card>
               </div>
-            </div>
-          </Carousel.Item>
-        ))}
+            ))}
+          </div>
+        </div>
       </Carousel>
 
       <br />

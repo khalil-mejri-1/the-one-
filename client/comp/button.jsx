@@ -15,15 +15,15 @@ const ButtonGroup = () => {
     <>
       <ScrollPanel style={{ width: '100%', height: '100px' }}>
         <div className='bloc-button'>
-          <button className="category-button_navbar b1" onClick={() => handleItemClick("naruto")}>Naruto</button>
-          <button className="category-button_navbar b2" onClick={() => handleItemClick("onepiece")}>One Piece</button>
-          <button className="category-button_navbar b3" onClick={() => handleItemClick("art")}>Art</button>
-          <button className="category-button_navbar b4" onClick={() => handleItemClick("film")}>Film</button>
-          <button className="category-button_navbar b5" onClick={() => handleItemClick("viking")}>Viking</button>
-          <button className="category-button_navbar b6" onClick={() => handleItemClick("foot")}>Football</button>
-          <button className="category-button_navbar b7" onClick={() => handleItemClick("hxh")}>Hunter X Hunter</button>
-          <button className="category-button_navbar b9" onClick={() => handleItemClick("kimetsu")}>Demon Slayer</button>
-          <button className="category-button_navbar b11" onClick={() => handleItemClick("deathnote")}>Death Note</button>
+          <button className="category-button_navbar b1" onClick={() => handleItemClick("Naruto")}>Naruto</button>
+          <button className="category-button_navbar b2" onClick={() => handleItemClick("One Piece")}>One Piece</button>
+          <button className="category-button_navbar b3" onClick={() => handleItemClick("Art Numérique")}>Art Numérique </button>
+          <button className="category-button_navbar b4" onClick={() => handleItemClick("Film")}>Film</button>
+          <button className="category-button_navbar b5" onClick={() => handleItemClick("Viking")}>Viking</button>
+          <button className="category-button_navbar b6" onClick={() => handleItemClick("Football")}>Football</button>
+          <button className="category-button_navbar b7" onClick={() => handleItemClick("Hunter X Hunter")}>Hunter X Hunter</button>
+          <button className="category-button_navbar b9" onClick={() => handleItemClick("Kimetsu")}>Kimetsu</button>
+          <button className="category-button_navbar b11" onClick={() => handleItemClick("Death Note")}>Death Note</button>
         </div>
       </ScrollPanel>
     </>
